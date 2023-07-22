@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/nmap_bases_scan/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Les scans - Cyber-puit de connaissances</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Les scans";
+        var mkdocs_page_input_path = "nmap_bases_scan.md";
+        var mkdocs_page_url = "/nmap_bases_scan/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Cyber-puit de connaissances
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../accueil/">Accueil</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Outils</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Nmap</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Les scans</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#scan-du-reseau">Scan du réseau</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#les-scans-basiques-et-moins-basiques">Les scans basiques et moins basiques</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tcp-basique-scan-de-base-de-nmap-sans-sudo">TCP basique (scan de base de Nmap sans sudo)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#scan-syn-scan-de-base-de-nmap-en-sudo">Scan SYN (scan de base de Nmap en sudo)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#scan-udp">Scan UDP</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ameliorer-la-rapidite-du-scan">Améliorer la rapidité du scan</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#contourner-les-firewall">Contourner les firewall</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#scan-null-sn">Scan NULL -sN</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#scan-fin-sf">Scan FIN -sF</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#scan-xmas-sx">Scan Xmas -sX</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../nmap_bases_utiles/">Utile</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Metasploit</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../metasploit_bases/">Les bases</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Réseau</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../changer_DNS_windows/">Changer DNS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Système</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="#">BIOS</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="#">Accès au hardware</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../reset_mdp_BIOS_hardware_PC_fixe/">PC fixe</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reset_mdp_BIOS_hardware_PC_portable/">PC portable</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Cyber-puit de connaissances</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+          <li>Outils &raquo;</li>
+          <li>Nmap &raquo;</li>
+      <li>Les scans</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="les-bases-de-nmap-les-scans">Les bases de Nmap : les scans</h1>
+<p>La base des bases c'est de faire un  </p>
+<pre><code>man nmap
+
+</code></pre>
+<p>Pour voir tous les switchs disponibles. </p>
+<p>Une autre manière d'avoir des infos est d'aller sur : <a href="https://nmap.org/book/">le site officiel nmap</a></p>
+<h2 id="scan-du-reseau">Scan du réseau</h2>
+<p>Pour commencer et avoir une vue d'ensemble du réseau le mieux est de connaitre les IPs des machines actives sur le réseau local. Pour faire ça on peut demander à nmap de faire un scan de type ping (protocole ICMP) en utilisant <code>-sn</code>.
+Il faut donner  le masque du réseau sur lequel il va faire son scan avec un /24 (ou /16 ou /8 ou autre) avec l'ip du broadcast ou alors mettre des * :</p>
+<pre><code>nmap -sn -vv 192.168.0.0-254
+nmap -sn -vv 192.168.0.0/24
+nmap -sn -vv 192.168.0.*
+</code></pre>
+<p>Pro tip : pour n'afficher que les hosts qui sont up on peut associer à la commande nmap : <code>grep -v "down"</code> qui demande de ne pas afficher toutes les lignes où il y a marqué "down"</p>
+<p>Rappel, le <code>-vv</code> c'est pour verbosity c'est pour que les résultats soient affichés avec plus de détails. <code>-v</code> donne un niveau de détail, <code>-vv</code> en donne 2.</p>
+<h2 id="les-scans-basiques-et-moins-basiques">Les scans basiques et moins basiques</h2>
+<p>Les scans basiques :
+* Scan de connexion TCP : <code>-sT</code>
+* Scan de connexion SYN ( TCP discret ou demi-ouvert) : <code>-sS</code>
+* Scan de connexion UDP : <code>-sU</code></p>
+<p>Les moins basiques :
+* Scan de connexion NULL (TCP sans flag) : <code>-sN</code>
+* Scan de conexion FIN (TCP avec flag de fermeture) : <code>-sF</code>
+* Scan de connexion Xmas (TCP avec 3 flags) : <code>-sX</code></p>
+<h2 id="tcp-basique-scan-de-base-de-nmap-sans-sudo">TCP basique (scan de base de Nmap sans sudo)</h2>
+<p>En utilisant le switch <code>-sT</code>, Nmap va essayer une connexion TCP/IP ( 3 way handshake), il envoie un paquet de synchronisation SYN puis s'attend à recevoir un packet de synchronisation et de prise en compte : SYN/ACK et finit par répondre un packet de prise en compte : ACK (acknoledgement).</p>
+<p>Si la connexion est fermée, pour toute requête SYN sera envoyé un paquet de rejet appelé reset : RST</p>
+<p>Petit rappel, après une connexion complète TCP/IP, on a un flux d'ouvert qu'il faut penser à fermer.</p>
+<p><strong>Si le port est derrière un firewall, le peu importe qu'il soit ouvert ou non, si notre flux n'est pas explicitement ouvert notre SYN sera drop par le firewall et on resevra un RST donc ce n'est pas forcément le meilleur moyen de connaitre les ports ouverts</strong></p>
+<h2 id="scan-syn-scan-de-base-de-nmap-en-sudo">Scan SYN (scan de base de Nmap en sudo)</h2>
+<p>C'est un scan plus discret car dit à moitié ouvert. Il se lance avec <code>-sS</code>. Nmap va envoyer un requête SYN puis s'il reçoit une réponse SYN/ACK, au lieu d'ouvrir le flux en envoyant un paquet ACK, il envoie un packet RST. Il ferme donc directement le flux mais prend connaissance que le port est ouvert.</p>
+<p>Avantages : 
+* Il peut être utilisé pour contourner les anciens systèmes de détection d'intrusion, car ils recherchent une poignée de main complète à trois voies. Ce n'est souvent plus le cas avec les solutions IDS modernes ; c'est pour cette raison que les analyses SYN sont encore souvent appelées analyses "furtives".
+* Les analyses SYN ne sont souvent pas enregistrées par les applications qui écoutent sur des ports ouverts, car la pratique courante consiste à enregistrer une connexion une fois qu'elle a été entièrement établie. Une fois de plus, cela contribue à l'idée que les analyses SYN sont furtives.
+* Sans avoir à se préoccuper de l'établissement (et de la déconnexion) d'une poignée de main à trois voies pour chaque port, les balayages SYN sont nettement plus rapides qu'un balayage TCP Connect standard.</p>
+<p>Inconvénients : 
+* Ils nécessitent les permissions sudo pour fonctionner correctement sous Linux. En effet, les analyses SYN nécessitent la capacité de créer des paquets bruts (par opposition à la poignée de main TCP complète), ce qui est un privilège que seul l'utilisateur root possède par défaut.
+* Les services instables sont parfois interrompus par les analyses SYN, ce qui peut s'avérer problématique si un client a fourni un environnement de production pour le test.</p>
+<p>En définitive, les avantages l'emportent sur les inconvénients.</p>
+<p>Pour cette raison, les scans SYN sont les scans par défaut utilisés par Nmap s'il est exécuté avec les permissions sudo. S'il est exécuté sans les permissions sudo, Nmap utilise par défaut le scan TCP Connect que nous avons vu dans la tâche précédente</p>
+<h2 id="scan-udp">Scan UDP</h2>
+<p>Les scans UDP sont très lent car le protocole UDP est fait pour la rapidité et n'a pas "d'accusé de réception", on peut connaitre les ports fermés mais on ne peut pas différencier les ports ouverts de ceux bloqués par firewall (et qui drop les paquets). On l'active avec <code>-sU</code>.</p>
+<p>Lorsqu'un paquet est envoyé à un port UDP ouvert, il ne devrait pas y avoir de réponse. Lorsque cela se produit, Nmap se réfère au port comme étant ouvert|filtré. En d'autres termes, il suspecte que le port est ouvert, mais qu'il pourrait être protégé par un pare-feu. S'il obtient une réponse UDP (ce qui est très inhabituel), le port est marqué comme ouvert. Le plus souvent, il n'y a pas de réponse, auquel cas la demande est envoyée une deuxième fois pour une double vérification. S'il n'y a toujours pas de réponse, le port est marqué comme ouvert|filtré et Nmap continue.</p>
+<p>Lorsqu'un paquet est envoyé à un port UDP fermé, la cible doit répondre par un paquet ICMP (ping) contenant un message indiquant que le port est inaccessible. Cela identifie clairement les ports fermés, que Nmap marque comme tels et passe à autre chose.</p>
+<p>*Lorsqu'il scanne des ports UDP, Nmap envoie généralement des requêtes complètement vides - juste des paquets UDP bruts. Cela dit, pour les ports qui sont généralement occupés par des services bien connus, il enverra plutôt une charge utile spécifique au protocole qui est plus susceptible de susciter une réponse à partir de laquelle un résultat plus précis peut être tiré.
+*</p>
+<h3 id="ameliorer-la-rapidite-du-scan">Améliorer la rapidité du scan</h3>
+<p>Comme le scan UDP est uuuuultra lent on peut le lancer que sur les ports les plus connus/fréquement utilisés. Par exemple si on veut faire le scan que sur les 50 ports les plus connus on peut faire : 
+<code>--top-ports 50</code>
+On peut faire ça avec n'importe quel type de scan mais celui avec lequel c'est le plus utilisé est avec le scan udp :
+<code>nmap -sU --top-ports 50 192.10.0.5</code></p>
+<h2 id="contourner-les-firewall">Contourner les firewall</h2>
+<p>Ces 3 scans sont encore un peu plus furtifs que le scan SYN. L'objectif ici est, bien sûr, d'échapper aux pare-feux. De nombreux pare-feux sont configurés pour rejeter les paquets TCP entrants vers les ports bloqués qui ont le drapeau SYN activé (bloquant ainsi les nouvelles demandes d'établissement de connexion). En envoyant des demandes qui ne contiennent pas le drapeau SYN, nous contournons efficacement ce type de pare-feu. Bien que ce soit une bonne chose en théorie, la plupart des solutions IDS modernes sont sensibles à ces types d'analyse, il ne faut donc pas compter sur leur efficacité à 100 % lorsqu'il s'agit de systèmes modernes.
+Attention, en pratique Microsoft Windows (et un grand nombre de dispositifs de réseau Cisco) sont connus pour répondre par un RST à tout paquet TCP malformé, que le port soit ouvert ou non. Il en résulte que tous les ports apparaissent comme étant fermés.</p>
+<h3 id="scan-null-sn">Scan NULL <code>-sN</code></h3>
+<p>Simplement, le scan envoie une requête TCP remplie de 0 et attend en retour une réponse de RST.</p>
+<h3 id="scan-fin-sf">Scan FIN <code>-sF</code></h3>
+<p>Le scan envoie une requête TCP avec uniquement le bit de "FIN" d'activé et s'attend à une réponse RST.</p>
+<h3 id="scan-xmas-sx">Scan Xmas <code>-sX</code></h3>
+<p>Le scan envoie un reqête TCP avec les bits Urgent(URG), Push (PSH) et Fin (FIN) d'activés</p>
+<h4 id="rappel-sur-la-structure-dun-flag-tcpip">Rappel sur la structure d'un flag TCP/IP :</h4>
+<p>3 octets composés de : 
+* 3 bits réservés - 1 bit "Nonce"
+* 1 bit CWR (Congestion Windows Reduced) - 1 bit  ECN (Echo) - 1 bit URG (Urgent) - 1 bit ACK (Acknoledgement)
+* 1 bit PSH (Push) - 1 bit RST (Reset) - 1 bit SYN (Synchronisation) - 1 bit FIN </p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../accueil/" class="btn btn-neutral float-left" title="Accueil"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../nmap_bases_utiles/" class="btn btn-neutral float-right" title="Utile">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../accueil/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../nmap_bases_utiles/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

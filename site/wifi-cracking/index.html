@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/wifi-cracking/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Cracker le mdp d'un wifi - Cyber-puit de connaissances</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Cracker le mdp d\u0027un wifi";
+        var mkdocs_page_input_path = "wifi-cracking.md";
+        var mkdocs_page_url = "/wifi-cracking/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Cyber-puit de connaissances
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../accueil/">Accueil</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Outils</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Nmap</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../nmap_bases_scan/">Les scans</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../nmap_bases_utiles/">Utile</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Metasploit</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../metasploit_bases/">Les bases</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Réseau</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../changer_DNS_windows/">Changer DNS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Système</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="#">BIOS</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="#">Accès au hardware</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../reset_mdp_BIOS_hardware_PC_fixe/">PC fixe</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reset_mdp_BIOS_hardware_PC_portable/">PC portable</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Cyber-puit de connaissances</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+      <li>Cracker le mdp d'un wifi</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="cracker-le-mdp-dun-wifi">Cracker le mdp d'un wifi</h1>
+<h2 id="les-types-de-wifi">Les types de wifi :</h2>
+<p>Il ya 3 types de réseau wifi : </p>
+<h3 id="wep">WEP</h3>
+<p>Les réseaux WEP pour Wired Equivalent Privacy ne sont normalement plus utilisés car ils a été prouvé qu'ils ont une faille de sécurité qui permet, après avoir capturé assez de paquets, de faire une attaque statistique pour déterminer le mdp.</p>
+<h3 id="wpa2-psk">WPA2-PSK</h3>
+<p>Les réseaux Wifi auxquels vous vous connectez en fournissant un mot de passe qui est le même pour tout le monde</p>
+<h3 id="wpa2-eap">WPA2-EAP</h3>
+<p>Réseaux Wifi auxquels vous vous authentifiez en fournissant un nom d'utilisateur et un mot de passe, qui sont envoyés à un serveur RADIUS(Un serveur pour l'authentification des clients, pas seulement pour le wifi).</p>
+<h2 id="type-dauthentification">Type d'authentification</h2>
+<p>Les réseaux WPA2 utilise une authentification appelée 4-way handshake. Globalement, sans rentrer dans les détails ça permet au client et à l'AP de prouver qu'ils connaissent la clé, sans se le dire l'un à l'autre. Le WPA et le WPA2 utilisent pratiquement la même méthode d'authentification, de sorte que les attaques sont les mêmes.</p>
+<h2 id="vulnerabilite">Vulnérabilité</h2>
+<p>Il n'y en a pas de connu pour le WPA2, il faut donc passer par une attaque bruteforce.
+A noter que le nombre de caractère minimal pour un mdp de WPA2 c'est 8.</p>
+<p>Les clés du WPA sont dérivées de l'ESSID (Un SSID (Le "nom" du réseau que vous voyez lorsque vous essayez de vous connecter) qui <em>peut</em> s'appliquer à plusieurs points d'accès, par exemple un bureau d'entreprise, formant normalement un réseau plus grand. Pour Aircrack, ils font normalement référence au réseau que vous attaquez.) et du mot de passe du réseau. L'ESSID agit comme un sel, ce qui rend les attaques par dictionnaire plus difficiles. Cela signifie que pour un mot de passe donné, la clé variera toujours pour chaque point d'accès. Cela signifie qu'à moins de calculer à l'avance le dictionnaire pour ce seul point d'accès/adresse MAC, vous devrez essayer des mots de passe jusqu'à ce que vous trouviez le bon.</p>
+<h2 id="outil-utilise">Outil utilisé</h2>
+<p>Pour les réseaux wifi on va utiliser l'outil aircrack-ng pour le bruteforce : <a href="https://aircrack-ng.org">site de l'outil</a></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/reset_mdp_BIOS_hardware_PC_portable/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>PC portable - Cyber-puit de connaissances</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "PC portable";
+        var mkdocs_page_input_path = "reset_mdp_BIOS_hardware_PC_portable.md";
+        var mkdocs_page_url = "/reset_mdp_BIOS_hardware_PC_portable/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Cyber-puit de connaissances
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../accueil/">Accueil</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Outils</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Nmap</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../nmap_bases_scan/">Les scans</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../nmap_bases_utiles/">Utile</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Metasploit</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../metasploit_bases/">Les bases</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Réseau</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../changer_DNS_windows/">Changer DNS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Système</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">BIOS</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Accès au hardware</a>
+    <ul class="current">
+                <li class="toctree-l3"><a class="reference internal" href="../reset_mdp_BIOS_hardware_PC_fixe/">PC fixe</a>
+                </li>
+                <li class="toctree-l3 current"><a class="reference internal current" href="./">PC portable</a>
+    <ul class="current">
+    <li class="toctree-l4"><a class="reference internal" href="#etape-1">Etape 1 :</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#etape-2">Etape 2 :</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#etape-3-si-ca-na-pas-fonctionne">Etape 3 : si ça n'a pas fonctionné</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#etape-4-retrouver-le-mdp-generique-du-bios">Etape 4 : Retrouver le mdp générique du BIOS</a>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Cyber-puit de connaissances</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+          <li>Système &raquo;</li>
+          <li>BIOS &raquo;</li>
+          <li>Accès au hardware &raquo;</li>
+      <li>PC portable</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="supprimer-le-mdp-maitre-bios-dun-pc-fixe-avec-acces-au-hardware">Supprimer le mdp maitre BIOS d'un PC fixe avec accès au hardware</h1>
+<h3 id="etape-1">Etape 1 :</h3>
+<p>Débrancher la carte mère et essayer d'allumer l'ordinateur à vide afin de vider les condensateurs (on est jamais trop prudent !)</p>
+<h3 id="etape-2">Etape 2 :</h3>
+<ol>
+<li>Retirer la pile de la carte mère attendre 2 min. </li>
+<li>Démarrer à vide. </li>
+<li>Remettre le pile. </li>
+<li>Rallumer l'ordinateur et regarder si le mdp a disparu.</li>
+</ol>
+<h3 id="etape-3-si-ca-na-pas-fonctionne">Etape 3 : si ça n'a pas fonctionné</h3>
+<p>C'est que le mot de passe est gardé sur une petite puce à côté.. L'action précédente a du remettre un mot de passe générique. Il faut alors trouver le mdp générique de l'ordinateur.</p>
+<h3 id="etape-4-retrouver-le-mdp-generique-du-bios">Etape 4 : Retrouver le mdp générique du BIOS</h3>
+<ol>
+<li>Retrouver le site du fabricant de l'ordinateur pour aller sur la page de récupération du mot de passe BIOS. Pour HP et Dell par exemple c'est : <a href="https://bios-pw.org/" title="site de récupération du mdp BIOS">bios-pw</a>.<br />
+<em>Attention : pour les PCs Asus je crois qu'il faut faire une requête manuelle en demandant au support. Ils demanderont le numéro de série et la facture de l'ordinateur ou une carte d'identité</em></li>
+<li>Retrouver le numéro de série de l'odinateur (généralement c'est marqué derrière l'ordinateur sur les petites étiquettes)</li>
+<li>Rentrer le numéro de série et cliquer sur le récupérer le mot de passe</li>
+<li>Rentrer le mdp généré en mode <strong>QWERTY</strong> car de base le clavié est mappé en qwerty.</li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../reset_mdp_BIOS_hardware_PC_fixe/" class="btn btn-neutral float-left" title="PC fixe"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../reset_mdp_BIOS_hardware_PC_fixe/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

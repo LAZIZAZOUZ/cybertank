@@ -1,0 +1,22 @@
+site_name : Cyber-puit de connaissances
+site_url : https://cyber-puit-de-connaissances.com/
+docs_dir : Docs
+theme : readthedocs
+
+nav: 
+  - Accueil : 'accueil.md'
+
+  - Outils : 
+    - Nmap : 
+      - Les scans : 'nmap_bases_scan.md'
+      - Utile : 'nmap_bases_utiles.md'
+    - Metasploit : 
+      - Les bases : 'metasploit_bases.md'
+  - Réseau : 
+    - Changer DNS : 'changer_DNS_windows.md'
+
+  - Système :
+    - BIOS : 
+      - Accès au hardware : 
+        - PC fixe : 'reset_mdp_BIOS_hardware_PC_fixe.md'
+        - PC portable : 'reset_mdp_BIOS_hardware_PC_portable.md'

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/metasploit_bases/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Les bases - Cyber-puit de connaissances</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Les bases";
+        var mkdocs_page_input_path = "metasploit_bases.md";
+        var mkdocs_page_url = "/metasploit_bases/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Cyber-puit de connaissances
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../accueil/">Accueil</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Outils</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="#">Nmap</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../nmap_bases_scan/">Les scans</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../nmap_bases_utiles/">Utile</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Metasploit</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Les bases</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#intro-fonctionnement">Intro fonctionnement</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#utiliser-une-exploit">Utiliser une exploit</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#rechercher-un-module">Rechercher un module</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#selectionner-un-module">Sélectionner un module</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#parametrer-le-module">Paramétrer le module</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-des-payloads">Trouver des payloads</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#lancer-lexploit">Lancer l'exploit</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#gerer-les-sessions">Gérer les sessions</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Réseau</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../changer_DNS_windows/">Changer DNS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Système</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="#">BIOS</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="#">Accès au hardware</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../reset_mdp_BIOS_hardware_PC_fixe/">PC fixe</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reset_mdp_BIOS_hardware_PC_portable/">PC portable</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Cyber-puit de connaissances</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+          <li>Outils &raquo;</li>
+          <li>Metasploit &raquo;</li>
+      <li>Les bases</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="les-bases-de-metasploit">Les bases de Metasploit</h1>
+<h2 id="intro-fonctionnement">Intro fonctionnement</h2>
+<p>Metasploit se lance avec la commande <code>msfconsole</code>.</p>
+<p>C'est une interface qui permet de lancer des exploits sur une cible. Quand on rentre dans la console metasploit, c'est une console à part du terminal classique.</p>
+<p>Les commandes utiles à garder en tête sont <code>help ma_commande</code> et <code>history</code> qui permet de lister l'historique des commandes effectuées.</p>
+<p>Dans metasploit, il y a des <strong>modules</strong> que l'on sélectionne en utilisant la commande <code>use le/chemin/de/mon/module</code>. Les modules sont un ensemble de code qui va s'exécuter automatiquement. La plupart du temps les modules sont des <strong>exploits</strong>. Ils permettent d'exploiter une faille mais il y a aussi des modules permettant de repérer des vulnérabilités ou autre.</p>
+<p>Il faut garder en tête qu'avec metasploit il y a une notion de profondeur. Lorsqu'on utilise un module on est au niveau de ce module uniquement, quand on est dans la payload d'un module et qu'on fait des modifications on est dans la payload précise uniquement, etc. Pour revenir d'un niveau en arrière on peut utiliser la commande : <code>back</code></p>
+<h2 id="utiliser-une-exploit">Utiliser une exploit</h2>
+<h3 id="rechercher-un-module">Rechercher un module</h3>
+<p>Il y a un grand nombre de modules présents avec metasploit. Il est donc nécessaire de faire des recherches au sein de ces modules. Pour cela on peut utiliser la commande :
+<code>search ce que je veux chercher</code>
+Il y a plusieurs paramètres possibles avec la fonction search. Plus d'infos en faisant un <code>help search</code>.
+Parmis les paramètres utiles il y a le fait de pouvoir sélectionner le rang des résultats. En effet, <strong>chaque exploit à un rang</strong> qui correspond globalement à son taux de réussite. 
+On peut aussi sélectionner les modules ayant <strong>la fonctionnalité "check" qui permet de checker si l'exploit est possible</strong> sur la cible sans le lancer pour autant.</p>
+<h3 id="selectionner-un-module">Sélectionner un module</h3>
+<p>Directement après une recherche on peut faire un <code>use [numéro du module dans la recherche]</code> ce qui vient sélectionner le module souhaité. Ou alors on peut marquer  le nom complet du module après le use.</p>
+<h3 id="parametrer-le-module">Paramétrer le module</h3>
+<p>Avant de paramétrer le module il vaut mieux comprendre ce qu'il fait et de quels paramètres il a besoin. Pour ça on peut faire un : <code>info</code> qui nous donne toutes les infos sur le module. Il y a aussi une liste de paramètres qu'on peut entrer en faisant :
+<code>set mon_paramètre sa_valeur</code></p>
+<p><strong>Attention !</strong> le paramètre sera sauvegardé en tant que variable local de ce module. Si on change de module il faudra refaire les paramètres.</p>
+<p>Pour faire des <strong>paramètres globaux</strong> il faut utiliser :
+<code>setg mon_paramètre_global sa_valeur</code></p>
+<p>On peut faire un <code>show options</code> pour voir si les paramètres ont bien été mis correctement</p>
+<p>On peut supprimer un paramètre local avec la commande <code>unset nom_du_paramètre</code>. On peut supprimer tous les paramètres locaux avec <code>unset all</code>. Pour faire de même avec les paramètre globaux : <code>unsetg</code></p>
+<h3 id="trouver-des-payloads">Trouver des payloads</h3>
+<p>Une fois que l'exploit sera lancé, une première faille sera créée et ça va ouvrir une porte appelée <strong>session</strong>. Suite à quoi on peut envoyer des <strong>payloads</strong> qui sont des morceaux de code qui vont s'exécuter sur la machine cible. 
+Pour trouver des payloads compatibles avec le module utilisé, on peut faire un :
+<code>show payloads</code></p>
+<h3 id="lancer-lexploit">Lancer l'exploit</h3>
+<p>Avant de lancer l'exploit, si le module le permet, on peut checker si l'exploit est faisable sur la cible avec :
+<code>check</code></p>
+<p>Pour lancer une exploit il suffit de taper la commande <code>exploit</code> ou <code>run</code>.</p>
+<p>Si on rajoute l'option <code>exploit -z</code> ça va lancer l'exploit et mettre la session ouverte en arrière plan.</p>
+<h3 id="gerer-les-sessions">Gérer les sessions</h3>
+<p>Une fois l'exploit réussi, cela ouvre une session. On peut continuer sur cette session directement ou la mettre en arrière plan avec la commande :
+<code>background</code></p>
+<p>Pour lister les sessions actives en arrière plan on peut faire un :
+<code>sessions</code></p>
+<p>Pour intéragir avec une session :
+<code>session -i [numéro de la sesssion]</code></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../nmap_bases_utiles/" class="btn btn-neutral float-left" title="Utile"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../changer_DNS_windows/" class="btn btn-neutral float-right" title="Changer DNS">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../nmap_bases_utiles/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../changer_DNS_windows/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

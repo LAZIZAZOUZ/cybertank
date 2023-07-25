@@ -13,6 +13,11 @@ nav:
     - Metasploit : 
       - Les bases : 'metasploit_bases.md'
       - Les exploits : 'metasploit_exploits.md'
+
+  - Exploits :
+    - SMB :
+      - Les bases de l'attaque sur SMB : 'SMB_exploit_bases.md'
+
   - Réseau : 
     - Changer DNS : 'changer_DNS_windows.md'
 

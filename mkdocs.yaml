@@ -12,6 +12,7 @@ nav:
       - Utile : 'nmap_bases_utiles.md'
     - Metasploit : 
       - Les bases : 'metasploit_bases.md'
+      - Les exploits : 'metasploit_exploits.md'
   - Réseau : 
     - Changer DNS : 'changer_DNS_windows.md'
 

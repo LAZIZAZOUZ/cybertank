@@ -1,4 +1,4 @@
-# Les bases de Metasploit
+# Metasploit : les bases
 
 ## Intro fonctionnement
 

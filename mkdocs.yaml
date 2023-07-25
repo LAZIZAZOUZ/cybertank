@@ -7,7 +7,7 @@ nav:
   - Accueil : 'accueil.md'
 
   - Utile :
-    - Ecoute de ports : 'Ecoute_ports.md'
+    - Ecoute de ports : 'ecoute_ports.md'
 
   - Outils : 
     - Nmap : 
@@ -16,11 +16,25 @@ nav:
     - Metasploit : 
       - Les bases : 'metasploit_bases.md'
       - Les exploits : 'metasploit_exploits.md'
+      - Les shells : 'metasploit_msfvenom.md'
+    
 
   - Exploits :
-    - SMB :
-      - Les bases de l'attaque sur SMB : 'SMB_exploit_bases.md'
+    - Les protocoles :
+      - SMB :
+        - Les bases de l'attaque sur SMB : 'SMB_exploit_bases.md'
+      - TELNET :
+        - Les bases de l'attaque sur TELNET : 'TELNET_exploit_bases.md'
+      - FTP : 'vide.md'
 
+    - Les OS :
+      - Windows : 'vide.md'
+       
+      - Linux : 'vide.md'
+        
+
+
+  
   - Réseau : 
     - Changer DNS : 'changer_DNS_windows.md'
 

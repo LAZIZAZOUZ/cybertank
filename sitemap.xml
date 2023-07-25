@@ -6,12 +6,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://cyber-puit-de-connaissances.com/Ecoute_ports/</loc>
+         <loc>https://cyber-puit-de-connaissances.com/SMB_exploit_bases/</loc>
          <lastmod>2023-07-25</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://cyber-puit-de-connaissances.com/SMB_exploit_bases/</loc>
+         <loc>https://cyber-puit-de-connaissances.com/TELNET_exploit_bases/</loc>
          <lastmod>2023-07-25</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -26,12 +26,22 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://cyber-puit-de-connaissances.com/ecoute_ports/</loc>
+         <lastmod>2023-07-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://cyber-puit-de-connaissances.com/metasploit_bases/</loc>
          <lastmod>2023-07-25</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cyber-puit-de-connaissances.com/metasploit_exploits/</loc>
+         <lastmod>2023-07-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cyber-puit-de-connaissances.com/metasploit_msfvenom/</loc>
          <lastmod>2023-07-25</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -52,6 +62,11 @@
     </url>
     <url>
          <loc>https://cyber-puit-de-connaissances.com/reset_mdp_BIOS_hardware_PC_portable/</loc>
+         <lastmod>2023-07-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cyber-puit-de-connaissances.com/vide/</loc>
          <lastmod>2023-07-25</lastmod>
          <changefreq>daily</changefreq>
     </url>

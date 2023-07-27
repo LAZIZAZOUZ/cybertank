@@ -54,6 +54,14 @@ nmap -p U:53 [ip]
 nmap -p T:1-1024 [ip]
 nmap -p U:53,9,113,T:21-25,80,443,8080 [ip]
 ```
+
+On peut obtenir toutes les infos possibles sur un port en particulier en lançant la commande :
+```
+nmap -p [port] -A [ip]
+```
+**Attention :** cette commande est longue à s'exécuter donc il faut bien la limiter à un seul et unique port.
+
+
 #### Recherche numéro de version 
 On peut trouver le numéro de version du service qui s'exécute sur des hôtes avec :
 ```

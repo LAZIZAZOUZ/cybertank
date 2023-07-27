@@ -36,6 +36,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://cyber-puit-de-connaissances.com/hydra_bases/</loc>
+         <lastmod>2023-07-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://cyber-puit-de-connaissances.com/metasploit_bases/</loc>
          <lastmod>2023-07-27</lastmod>
          <changefreq>daily</changefreq>

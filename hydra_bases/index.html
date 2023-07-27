@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/sites_utiles/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/hydra_bases/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Les sites utiles - Cyber-puit de connaissances</title>
+    <title>Les bases - Cyber-puit de connaissances</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Les sites utiles";
-        var mkdocs_page_input_path = "sites_utiles.md";
-        var mkdocs_page_url = "/sites_utiles/";
+        var mkdocs_page_name = "Les bases";
+        var mkdocs_page_input_path = "hydra_bases.md";
+        var mkdocs_page_url = "/hydra_bases/";
       </script>
     
     <script src="../js/jquery-3.6.0.min.js" defer></script>
@@ -45,30 +45,14 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Utile</span></p>
-              <ul class="current">
+              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../ecoute_ports/">Ecoute de ports</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Les sites utiles</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#protocoles">Protocoles</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#ftp">FTP</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#exploitations">Exploitations</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#exploits-de-services-distants">Exploits de services distants</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#speciale-ctf">Speciale CTF</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../sites_utiles/">Les sites utiles</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Outils</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="#">Nmap</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../nmap_bases_scan/">Les scans</a>
@@ -87,9 +71,23 @@
                 </li>
     </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Hydra</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../hydra_bases/">Les bases</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Hydra</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Les bases</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#utilisation">Utilisation</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#syntaxe">Syntaxe</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#options">Options</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#exemples">Exemples</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
     </ul>
                   </li>
@@ -157,8 +155,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
-          <li>Utile &raquo;</li>
-      <li>Les sites utiles</li>
+          <li>Outils &raquo;</li>
+          <li>Hydra &raquo;</li>
+      <li>Les bases</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -167,28 +166,110 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="les-sites-interessants-et-utiles">Les sites intéressants et utiles</h1>
-<h2 id="protocoles">Protocoles</h2>
-<h3 id="ftp">FTP</h3>
-<ul>
-<li><a href="https://www.ietf.org/rfc/rfc959.txt">Doc technique FTP</a></li>
-</ul>
-<h2 id="exploitations">Exploitations</h2>
-<h3 id="exploits-de-services-distants">Exploits de services distants</h3>
-<ul>
-<li><a href="https://attack.mitre.org/techniques/T1210/">Liste d'exploits de services distants : mitre</a></li>
-<li><a href="https://gregit.medium.com/exploiting-simple-network-services-in-ctfs-ec8735be5eef">Article vulnérabilité VPN multiples</a></li>
-</ul>
-<h3 id="speciale-ctf">Speciale CTF</h3>
-<ul>
-<li><a href="https://gregit.medium.com/exploiting-simple-network-services-in-ctfs-ec8735be5eef">services connectés simples</a></li>
-</ul>
+                <h1 id="les-bases-de-loutil-hydra">Les bases de l'outil Hydra</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Hydra est un outil puissant de bruteforce de mots de passe en ligne. Il peut être utilisé pour attaquer de nombreux protocoles différents !</p>
+<h2 id="utilisation">Utilisation</h2>
+<h3 id="syntaxe">Syntaxe</h3>
+<pre><code class="language-bash">hydra [[[-l LOGIN|-L FILE] [-p PASS|-P FILE]] | [-C FILE]] [-e nsr] [-o FILE] [-t TASKS] [-M FILE [-T TASKS]] [-w TIME] [-W TIME] [-f] [-s PORT] [-x MIN:MAX:CHARSET] [-SuvVd46] [service://server[:PORT][/OPT]]
+</code></pre>
+<h3 id="options">Options</h3>
+<table>
+<thead>
+<tr>
+<th>TAG</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-l LOGIN</code> ou <code>-L FILE</code></td>
+<td>identifiant ou fichier contenant une liste d'identifiants</td>
+</tr>
+<tr>
+<td><code>-p PASS</code> ou <code>-P FILE</code></td>
+<td>mot de passe ou fichier contenant une liste de mots de passe</td>
+</tr>
+<tr>
+<td><code>-C FILE</code></td>
+<td>fichier contenant des identifiants et des mots de passe séparés par des espaces</td>
+</tr>
+<tr>
+<td><code>-e nsr</code></td>
+<td>arrêter sur le premier succès, afficher les réponses négatives, afficher les réponses positives</td>
+</tr>
+<tr>
+<td><code>-o FILE</code></td>
+<td>enregistrer les résultats dans le fichier FILE</td>
+</tr>
+<tr>
+<td><code>-t TASKS</code></td>
+<td>exécuter TASKS nombre de tâches simultanément (valeur par défaut : 16)</td>
+</tr>
+<tr>
+<td><code>-M FILE</code></td>
+<td>serveurs multiples (fichier de liste)</td>
+</tr>
+<tr>
+<td><code>-T TASKS</code></td>
+<td>exécuter TASKS nombre de tâches simultanément par serveur (valeur par défaut : 16)</td>
+</tr>
+<tr>
+<td><code>-w TIME</code></td>
+<td>délai d'attente pour les réponses (valeur par défaut : 30)</td>
+</tr>
+<tr>
+<td><code>-W TIME</code></td>
+<td>délai d'attente global pour les réponses (valeur par défaut : 30)</td>
+</tr>
+<tr>
+<td><code>-f</code></td>
+<td>quitter après la première réponse positive</td>
+</tr>
+<tr>
+<td><code>-s PORT</code></td>
+<td>si le service est sur un autre port que le port par défaut, spécifiez-le ici</td>
+</tr>
+<tr>
+<td><code>-x MIN:MAX:CHARSET</code></td>
+<td>exécuter un bruteforce, avec des longueurs de mot de passe de MIN à MAX avec le jeu de caractères CHARSET</td>
+</tr>
+<tr>
+<td><code>-S</code></td>
+<td>connexion SSL</td>
+</tr>
+<tr>
+<td><code>-u</code></td>
+<td>connexion TLS</td>
+</tr>
+<tr>
+<td><code>-vV</code></td>
+<td>niveau de verbosité, -v : afficher les tentatives, -V : afficher les tentatives et les réponses</td>
+</tr>
+<tr>
+<td><code>-d</code></td>
+<td>afficher les informations de débogage</td>
+</tr>
+<tr>
+<td><code>-4</code></td>
+<td>force IPv4</td>
+</tr>
+<tr>
+<td><code>-6</code></td>
+<td>force IPv6</td>
+</tr>
+</tbody>
+</table>
+<h3 id="exemples">Exemples</h3>
+<h4 id="ssh">SSH</h4>
+<pre><code class="language-bash">hydra -l root -P /usr/share/wordlists/rockyou.txt -t 4 -vV
+</code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../ecoute_ports/" class="btn btn-neutral float-left" title="Ecoute de ports"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../nmap_bases_scan/" class="btn btn-neutral float-right" title="Les scans">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../metasploit_msfvenom/" class="btn btn-neutral float-left" title="Les shells"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../SMB_exploit_bases/" class="btn btn-neutral float-right" title="Les bases de l'attaque sur SMB">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -211,10 +292,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../ecoute_ports/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../metasploit_msfvenom/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../nmap_bases_scan/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../SMB_exploit_bases/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

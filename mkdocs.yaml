@@ -8,6 +8,7 @@ nav:
 
   - Utile :
     - Ecoute de ports : 'ecoute_ports.md'
+    - Les sites utiles : 'sites_utiles.md'
 
   - Outils : 
     - Nmap : 
@@ -17,6 +18,8 @@ nav:
       - Les bases : 'metasploit_bases.md'
       - Les exploits : 'metasploit_exploits.md'
       - Les shells : 'metasploit_msfvenom.md'
+    - Hydra :
+      - Les bases : 'hydra_bases.md'
     
 
   - Exploits :
@@ -25,7 +28,7 @@ nav:
         - Les bases de l'attaque sur SMB : 'SMB_exploit_bases.md'
       - TELNET :
         - Les bases de l'attaque sur TELNET : 'TELNET_exploit_bases.md'
-      - FTP : 'vide.md'
+      - FTP : 'FTP_exploit_bases.md'
 
     - Les OS :
       - Windows : 'vide.md'

@@ -29,6 +29,9 @@ nav:
       - FTP : 'FTP_exploit_bases.md'
       - NFS : 'NFS_exploit_bases.md'
       - SSH : 'SSH_exploit_bases.md'
+      - SMTP : 'SMTP_exploit_bases.md'
+    - Autre services :
+      - MySQL : 'MySQL_exploit_bases.md'
 
     - Les OS :
       - Windows : 'vide.md'

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/wireshark_bases/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Les bases - Cyber-puit de connaissances</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Les bases";
+        var mkdocs_page_input_path = "wireshark_bases.md";
+        var mkdocs_page_url = "/wireshark_bases/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Cyber-puit de connaissances
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../accueil/">Accueil</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Utile</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ecoute_ports/">Ecoute de ports</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sites_utiles/">Les sites utiles</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Outils</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="#">Nmap</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../nmap_bases_scan/">Les scans</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../nmap_bases_utiles/">Utile</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Metasploit</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../metasploit_bases/">Les bases</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../metasploit_exploits/">Les exploits</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../metasploit_msfvenom/">Les shells</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Hydra</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../hydra_bases/">Les bases</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Wireshark</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Les bases</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#le-modele-osi">Le modèle OSI</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#les-filtres">Les filtres</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#syntaxe">Syntaxe</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#operateurs">Opérateurs</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#protocoles">Protocoles</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#arp">ARP</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#icmp">ICMP</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#tcp">TCP</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Exploits</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Les protocoles</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../SMB_exploit_bases/">SMB</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../TELNET_exploit_bases/">TELNET</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../FTP_exploit_bases/">FTP</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../NFS_exploit_bases/">NFS</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../SSH_exploit_bases/">SSH</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../SMTP_exploit_bases/">SMTP</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Autre services</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../MySQL_exploit_bases/">MySQL</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Les OS</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../vide/">Windows</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../vide/">Linux</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Réseau</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../changer_DNS_windows/">Changer DNS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Système</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="#">BIOS</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="#">Accès au hardware</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../reset_mdp_BIOS_hardware_PC_fixe/">PC fixe</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reset_mdp_BIOS_hardware_PC_portable/">PC portable</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Cyber-puit de connaissances</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+          <li>Outils &raquo;</li>
+          <li>Wireshark &raquo;</li>
+      <li>Les bases</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="les-bases-de-wireshark">Les bases de wireshark</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Wireshark est un outil d'analyse de paquets réseau. Il permet de capturer et d'analyser le trafic réseau. Il est disponible sur Windows, Linux et Mac.
+* <a href="https://www.wireshark.org/">Site officiel</a>
+* <a href="https://www.wireshark.org/download.html">Download</a>
+* <a href="https://www.wireshark.org/docs/">Documentation</a></p>
+<h3 id="le-modele-osi">Le modèle OSI</h3>
+<p>Le modèle OSI est un modèle de communication entre les ordinateurs. Il est composé de 7 couches :</p>
+<table>
+<thead>
+<tr>
+<th>Numéro</th>
+<th>Nom</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7</td>
+<td>Application</td>
+<td>Protocoles de haut niveau</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Présentation</td>
+<td>Conversion des données</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Session</td>
+<td>Gestion des sessions</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Transport</td>
+<td>Gestion des connexions</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Réseau</td>
+<td>Routage des paquets</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Liaison de données</td>
+<td>Gestion des erreurs</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Physique</td>
+<td>Transmission des données</td>
+</tr>
+</tbody>
+</table>
+<h4 id="exemple-de-protocoles-par-couche-du-modele-osi">Exemple de protocoles par couche du modèle OSI</h4>
+<table>
+<thead>
+<tr>
+<th>Numéro</th>
+<th>Nom</th>
+<th>Protocoles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7</td>
+<td>Application</td>
+<td>HTTP, FTP, SMTP, DNS, DHCP, SSH, Telnet, SNMP, POP3, IMAP, SMB, AFP, ...</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Présentation</td>
+<td>SSL, TLS, ...</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Session</td>
+<td>NetBIOS, ...</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Transport</td>
+<td>TCP, UDP, ...</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Réseau</td>
+<td>IP, ICMP, ARP, ...</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Liaison de données</td>
+<td>Ethernet, PPP, ...</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Physique</td>
+<td>RJ45, ...</td>
+</tr>
+</tbody>
+</table>
+<h2 id="les-filtres">Les filtres</h2>
+<p>Les filtres permettent de filtrer les paquets capturés. Ils permettent de filtrer sur les protocoles, les adresses IP, les ports, etc.</p>
+<h3 id="syntaxe">Syntaxe</h3>
+<p>La syntaxe des filtres est la suivante :</p>
+<pre><code class="language-bash">&lt;protocole&gt; &lt;opérateur&gt; &lt;valeur&gt;
+</code></pre>
+<h3 id="operateurs">Opérateurs</h3>
+<p>Il existe plusieurs opérateurs :</p>
+<ul>
+<li><code>==</code> : égal à</li>
+<li><code>!=</code> : différent de</li>
+<li><code>&gt;</code> : supérieur à</li>
+<li><code>&lt;</code> : inférieur à</li>
+<li><code>&gt;=</code> : supérieur ou égal à</li>
+<li><code>&lt;=</code> : inférieur ou égal à</li>
+<li><code>&amp;&amp;</code> : ET</li>
+<li><code>||</code> : OU</li>
+<li><code>!</code> : NON</li>
+</ul>
+<h4 id="exemples-de-filtres">Exemples de filtres</h4>
+<pre><code class="language-bash">
+# Filtre sur le protocole HTTP
+http
+
+# Filtre sur le protocole HTTP et le port 80
+http &amp;&amp; port 80
+
+# Filtre sur le protocole HTTP et le port 80 et l'adresse IP
+http &amp;&amp; port 80 &amp;&amp; ip.addr == &lt;ip&gt;
+
+# Filtre sur le protocole HTTP et le port 80 et l'adresse IP et la méthode GET
+
+http &amp;&amp; port 80 &amp;&amp; ip.addr == &lt;ip&gt; &amp;&amp; http.request.method == GET
+
+# Filtre sur le protocole HTTP et le port 80 et l'adresse IP et la méthode GET et le fichier index.html
+
+http &amp;&amp; port 80 &amp;&amp; ip.addr == &lt;ip&gt; &amp;&amp; http.request.method == GET &amp;&amp; http.request.uri == /index.html
+</code></pre>
+<h2 id="protocoles">Protocoles</h2>
+<h3 id="arp">ARP</h3>
+<p>ARP signifie <strong>Address Resolution Protocol</strong>. Il permet de faire la correspondance entre une adresse IP et une adresse MAC. C'est un protocole de la <strong>couche 3</strong> du modèle OSI.
+Ils contiennent des messages REQUEST et des messages RESPONSE. Pour identifier les paquets, l'en-tête du message contient l'un des deux codes d'opération suivants :
+* 1 : ARP Request
+* 2 : ARP Reply</p>
+<p>Il est utile de noter que la plupart des appareils s'identifient eux-mêmes ou que Wireshark les identifie, comme <strong>Intel_78</strong>. Un exemple de trafic suspect serait de nombreuses requêtes provenant d'une source non reconnue. Vous devez cependant activer un paramètre dans Wireshark pour résoudre les adresses physiques. Pour activer cette fonction, allez dans <em>Affichage &gt; Résolution des noms &gt;</em> Assurez-vous que l'option <em>Résoudre les adresses physiques</em> est cochée.</p>
+<h4 id="exemple-de-paquet-arp">Exemple de paquet ARP</h4>
+<p><img alt="Paquet ARP" src="../Images/Exemple%20de%20paquet%20ARP%201.png" /></p>
+<p>En regardant les détails du paquet ci-dessus, les détails les plus importants du paquet sont soulignés en rouge. 
+* L'Opcode est l'abréviation de code d'opération et indique s'il s'agit d'une requête ou d'une réponse ARP.
+* La cible du paquet, qui dans ce cas, est une demande de diffusion à tous.</p>
+<p>En regardant les détails du paquet ci-dessus, nous pouvons voir d'après l'Opcode qu'il s'agit d'un paquet ARP Reply. Nous pouvons également obtenir d'autres informations utiles telles que les adresses MAC et IP qui ont été envoyées avec la réponse, puisqu'il s'agit d'un paquet de réponse, nous savons qu'il s'agit des informations envoyées avec le message.</p>
+<p>ARP est l'un des protocoles les plus simples à analyser, tout ce dont vous devez vous souvenir est d'identifier s'il s'agit d'un paquet de demande ou de réponse et par qui il est envoyé.</p>
+<p>Liste des filtres pour le protocole ARP :</p>
+<p><a href="https://www.wireshark.org/docs/dfref/a/arp.html">https://www.wireshark.org/docs/dfref/a/arp.html</a></p>
+<h3 id="icmp">ICMP</h3>
+<p>ICMP signifie <strong>Internet Control Message Protocol</strong>. Il permet de faire des requêtes et des réponses pour tester la connectivité entre deux hôtes. C'est un protocole de la <strong>couche 3</strong> du modèle OSI.
+Il est très connu car c'est le protocole associé à la commande <code>ping</code>.</p>
+<p>Les paquets ICMP ont une structure similaire à celle des paquets IP. Ils contiennent des messages REQUEST et des messages RESPONSE. Pour identifier les paquets, l'en-tête du message contient l'un des deux codes d'opération suivants (<strong>type</strong>):</p>
+<ul>
+<li>8 : ICMP Request</li>
+<li>0 : ICMP Reply</li>
+</ul>
+<p>Si ces codes sont modifiés ou ne semblent pas corrects, il s'agit généralement d'un signe d'activité suspecte.</p>
+<h3 id="tcp">TCP</h3>
+<p>TCP signifie <strong>Transmission Control Protocol</strong>. Il permet de faire des connexions entre deux hôtes. C'est un protocole de la <strong>couche 4</strong> du modèle OSI.</p>
+<p>Lors de l'analyse des paquets TCP, Wireshark peut être très utile et <strong>coder les paquets par couleur en fonction du niveau de danger</strong>. Si vous ne vous souvenez pas du code couleur, relisez la documentation de wireshark et rafraîchissez vos connaissances sur la façon dont Wireshark utilise les couleurs pour faire correspondre les paquets.</p>
+<p>TCP peut donner un aperçu utile d'un réseau lorsqu'il est analysé, mais il peut aussi être difficile à analyser en raison du nombre de paquets qu'il envoie. C'est là que vous devrez peut-être utiliser d'autres outils tels que <strong>RSA NetWitness</strong> et <strong>NetworkMiner</strong> pour filtrer et analyser davantage les captures.</p>
+<h4 id="analyse-des-paquets-tcp">Analyse des paquets TCP</h4>
+<p>Pour analyser les paquets TCP, nous n'entrerons pas dans les détails de chacun d'entre eux, mais nous examinerons quelques-uns de leurs comportements et de leurs structures.</p>
+<p>Ci-dessous, nous voyons les détails d'un paquet SYN. La principale chose que nous voulons observer dans un paquet TCP est le numéro de séquence et le numéro d'accusé de réception. Ceux-ci sont utilisés pour identifier les paquets et les connexions TCP :
+* Le numéro de séquence (<strong>sequence number</strong>) est le numéro de séquence du paquet
+* Le numéro d'accusé de réception (<strong>Acknowledgment number</strong>) est le numéro de séquence du paquet suivant que l'hôte attend de recevoir. Cela permet de s'assurer que les paquets sont reçus dans le bon ordre et qu'aucun paquet n'est perdu.</p>
+<p>Dans Wireshark, nous pouvons également voir le numéro de séquence original en naviguant vers <em>edit &gt; preferences &gt; protocols &gt; TCP &gt; relative sequence numbers</em> (uncheck boxes).</p>
+<p>En règle générale, <strong>les paquets TCP doivent être examinés dans leur ensemble</strong> pour raconter une histoire, plutôt que d'être examinés un par un dans les détails.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../hydra_bases/" class="btn btn-neutral float-left" title="Les bases"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../SMB_exploit_bases/" class="btn btn-neutral float-right" title="SMB">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../hydra_bases/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../SMB_exploit_bases/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

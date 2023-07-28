@@ -24,11 +24,11 @@ nav:
 
   - Exploits :
     - Les protocoles :
-      - SMB :
-        - Les bases de l'attaque sur SMB : 'SMB_exploit_bases.md'
-      - TELNET :
-        - Les bases de l'attaque sur TELNET : 'TELNET_exploit_bases.md'
+      - SMB : 'SMB_exploit_bases.md'
+      - TELNET : 'TELNET_exploit_bases.md'
       - FTP : 'FTP_exploit_bases.md'
+      - NFS : 'NFS_exploit_bases.md'
+      - SSH : 'SSH_exploit_bases.md'
 
     - Les OS :
       - Windows : 'vide.md'

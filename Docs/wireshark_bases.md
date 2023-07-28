@@ -140,3 +140,116 @@ Ci-dessous, nous voyons les détails d'un paquet SYN. La principale chose que no
 Dans Wireshark, nous pouvons également voir le numéro de séquence original en naviguant vers *edit > preferences > protocols > TCP > relative sequence numbers* (uncheck boxes).
 
 En règle générale, **les paquets TCP doivent être examinés dans leur ensemble** pour raconter une histoire, plutôt que d'être examinés un par un dans les détails.
+
+### DNS 
+
+DNS signifie **Domain Name System**. Il permet de faire la correspondance entre un nom de domaine et une adresse IP. C'est un protocole de la **couche 7** du modèle OSI.
+
+#### Port DNS
+
+Le port DNS est le port 53. C'est du TCP/IP.
+
+#### Requête DNS
+
+Les requêtes DNS sont des requêtes envoyées par un client DNS à un serveur DNS. Elles sont envoyées sur le port 53 en UDP ou TCP. Elles sont composées d'un en-tête et d'une question. L'en-tête contient les informations suivantes :
+* ID : identifiant de la requête
+* QR : 0 pour une requête, 1 pour une réponse
+* Opcode : 0 pour une requête standard
+* AA : 1 si le serveur est autoritaire pour le domaine
+* TC : 1 si le message est tronqué
+* RD : 1 si le client souhaite une requête récursive
+* RA : 1 si le serveur peut faire une requête récursive
+* Z : 0
+* RCODE : 0 si la requête est réussie
+
+
+#### Points suspects dans les paquets DNS
+
+Vous devez garder à l'esprit un certain nombre d'éléments décrits ci-dessous lorsque vous analysez des paquets DNS.
+
+* Query-Response 
+* DNS-Server Only
+* UDP
+
+Si l'un de ces éléments n'est pas à sa place, les paquets doivent faire l'objet d'un examen plus approfondi et être considérés comme suspects.
+
+### HTTP
+
+HTTP signifie **HyperText Transfer Protocol**. Il permet de faire des requêtes et des réponses pour récupérer des pages web. C'est un protocole de la **couche 7** du modèle OSI. HTTP est l'un des protocoles les plus directs pour l'analyse des paquets. Le protocole va droit au but et n'inclut pas de poignée de main ou de conditions préalables à la communication.
+HTTP n'est pas un protocole que l'on voit beaucoup, car HTTPS est désormais plus couramment utilisé ; cependant, HTTP est encore souvent utilisé et peut être très facile à analyser si l'on en a l'occasion.
+
+#### Port HTTP
+
+Le port HTTP est le port 80. C'est du TCP/IP.
+
+#### Requête HTTP
+
+Les requêtes HTTP sont des requêtes envoyées par un client HTTP à un serveur HTTP. Elles sont envoyées sur le port 80 en TCP. Elles sont composées d'une ligne de requête, d'en-têtes et d'un corps. La ligne de requête contient les informations suivantes :
+
+* Méthode : GET, POST, PUT, DELETE, ...
+* URI : Uniform Resource Identifier
+* Version : HTTP/1.1, HTTP/2, ...
+
+#### Analyse de paquets HTTP
+
+HTTP est utilisé pour envoyer des requêtes GET et POST à un serveur web afin de recevoir des choses telles que des pages web. Savoir analyser HTTP peut être utile pour repérer rapidement des éléments tels que SQLi, les Web Shells et d'autres vecteurs d'attaque liés au web.
+
+Lorsque vous analysez des paquets HTTP, vous devez vous concentrer sur les éléments suivants :
+
+Element | Description
+--- | ---
+Méthode | La méthode utilisée pour la requête. Les méthodes les plus courantes sont GET et POST.
+URI | L'URI est l'adresse de la page web demandée.
+Version | La version du protocole HTTP utilisée. Les versions les plus courantes sont HTTP/1.1 et HTTP/2.
+Host | L'hôte est l'adresse IP du serveur web.
+User-Agent | Le User-Agent est le navigateur utilisé pour envoyer la requête.
+Accept | L'Accept est le type de données acceptées par le navigateur.
+Cookie | Le Cookie est le cookie envoyé par le navigateur.
+
+### HTTPS 
+
+HTTPS signifie **HyperText Transfer Protocol Secure**. Il permet de faire des requêtes et des réponses pour récupérer des pages web. C'est un protocole de la **couche 7** du modèle OSI. HTTPS est une version sécurisée de HTTP. Il utilise le protocole TLS pour sécuriser les communications. Il est donc plus difficile à analyser que HTTP.Il peut être l'un des protocoles les plus difficiles à comprendre du point de vue de l'analyse des paquets et il peut être déroutant de comprendre les étapes à suivre pour analyser les paquets HTTPS.
+
+#### Création d'un tunnel sécurisé HTTPS
+
+Lorsqu'un client se connecte à un serveur HTTPS, il doit d'abord établir une connexion TCP/IP avec le serveur. Une fois la connexion TCP/IP établie, le client et le serveur doivent établir une connexion TLS. Pour ce faire, le client et le serveur doivent négocier les paramètres de la connexion TLS. Une fois la connexion TLS établie, le client et le serveur peuvent commencer à communiquer en utilisant le protocole HTTP.
+Etapes :
+
+1. Le client et le serveur conviennent d'une version du protocole
+2. Le client et le serveur sélectionnent un algorithme cryptographique
+3. Le client et le serveur peuvent s'authentifier l'un l'autre ; cette étape est facultative.
+4. Création d'un tunnel sécurisé avec une clé publique
+
+#### Analyse des paquets HTTPS 
+
+Les paquets HTTPS s'analysent comme ceux HTTP à la différence près qu'il faut entrer la clé de chiffrement dans wireshark afin de déchiffrer les messages. Pour cela, il faut aller dans *Edit > Preferences > Protocols > TLS > Edit > + > Protocol : http > Key File : <fichier de clé> > Password : <mot de passe>*.
+
+Exemple de configuration de la clé : 
+
+* IP address : 127.0.0.1
+* Port : start_tls
+* Protocol : http
+* Key File : <fichier de clé>
+* Password : <mot de passe>
+ 
+## Outils d'analyse wiresark
+
+### Organiser la Hierarchie des protocoles 
+
+Nous pouvons utiliser certaines des fonctions intégrées de Wireshark pour nous aider à assimiler toutes ces données et à **les organiser en vue d'une analyse ultérieure**. Nous pouvons commencer par examiner une fonction très utile de Wireshark pour organiser les protocoles présents dans une capture, à savoir la **Hiérarchie des protocoles**. Naviguez vers *Statistiques > Hiérarchie des protocoles*.
+
+Ces informations peuvent être très utiles dans des applications pratiques telles que la chasse aux menaces pour identifier les divergences dans les captures de paquets.
+
+### Organiser les URI 
+
+La prochaine fonctionnalité de Wireshark que nous allons examiner est l'exportation d'objets HTTP. Cette fonction nous permettra d'**organiser tous les URI** demandés dans la capture. Pour utiliser Export HTTP Object, naviguez vers *File > Export Objects > HTTP*.
+
+Comme pour la hiérarchie des protocoles, cela peut être utile pour identifier rapidement d'éventuelles divergences dans les captures.
+
+### Points de terminaison ou Endpoint 
+
+La  fonction points de terminaison (Endpoint) permet à l'utilisateur d'organiser tous les points de terminaison et toutes les adresses IP trouvés dans une capture spécifique. Tout comme les autres fonctionnalités, elle peut être utile pour identifier l'origine d'une anomalie. Pour utiliser la fonction Points d'extrémité, accédez à *Statistiques > Points d'extrémité*.
+
+### Organiser les flux de données 
+
+Afin d'organiser le flux de données, nous pouvons utliser la fonction d'exportation d'objets HTTP. Pour accéder à cette fonction, naviguez vers Fichier > Exporter des objets > HTTP.

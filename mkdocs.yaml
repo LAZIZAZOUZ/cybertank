@@ -20,6 +20,8 @@ nav:
       - Les shells : 'metasploit_msfvenom.md'
     - Hydra :
       - Les bases : 'hydra_bases.md'
+    - Wireshark :
+      - Les bases : 'wireshark_bases.md'
     
 
   - Exploits :

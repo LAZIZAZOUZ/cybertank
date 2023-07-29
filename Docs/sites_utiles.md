@@ -27,6 +27,22 @@
 * [Doc technique SQL 2](https://www.w3schools.com/sql/sql_intro.asp)
 * [Doc technique SQL 3](https://www.w3schools.com/php/php_mysql_intro.asp)
 
+### ICMP 
+
+* [Doc technique ICMP](https://datatracker.ietf.org/doc/html/rfc792)
+
+### TCP 
+
+* [Doc technique TCP](https://datatracker.ietf.org/doc/html/rfc793)
+
+### DNS 
+
+* [Doc technique DNS](https://www.ietf.org/rfc/rfc1035.txt)
+
+### HTTP 
+
+* [Doc technique HTTP](https://www.ietf.org/rfc/rfc2616.txt)
+
 
 ## Exploitations
 

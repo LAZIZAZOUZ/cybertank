@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/SSH_exploit_bases/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/nessus_bases/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>SSH - Cyber-puit de connaissances</title>
+    <title>Les bases - Cyber-puit de connaissances</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "SSH";
-        var mkdocs_page_input_path = "SSH_exploit_bases.md";
-        var mkdocs_page_url = "/SSH_exploit_bases/";
+        var mkdocs_page_name = "Les bases";
+        var mkdocs_page_input_path = "nessus_bases.md";
+        var mkdocs_page_url = "/nessus_bases/";
       </script>
     
     <script src="../js/jquery-3.6.0.min.js" defer></script>
@@ -52,7 +52,7 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Outils</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="#">Nmap</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../nmap_bases_scan/">Les scans</a>
@@ -85,17 +85,33 @@
                 </li>
     </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Nessus</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../nessus_bases/">Les bases</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Nessus</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Les bases</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#intro">Intro</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#demarrage-de-nessus">Démarrage de Nessus</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fonctionnement-de-nessus">Fonctionnement de Nessus</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#configuration-de-nessus">Configuration de Nessus</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#configuration-du-scan">Configuration du scan</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
     </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Exploits</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Les protocoles</a>
-    <ul class="current">
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Les protocoles</a>
+    <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../SMB_exploit_bases/">SMB</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../TELNET_exploit_bases/">TELNET</a>
@@ -104,35 +120,7 @@
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../NFS_exploit_bases/">NFS</a>
                 </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">SSH</a>
-    <ul class="current">
-    <li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#connexion-en-ssh">Connexion en SSH</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#connexion-en-ssh-avec-le-nom-dutilisateur">Connexion en SSH avec le nom d'utilisateur</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#connexion-en-ssh-avec-une-cle-privee">Connexion en SSH avec une clé privée</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#le-port-de-base-ssh">Le port de base SSH</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#enumeration">Enumeration</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#packet-necessaire">Packet nécessaire</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#enumeration-des-utilisateurs">Enumération des utilisateurs</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#exploitation">Exploitation</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#bruteforce-dun-utilisateur">Bruteforce d'un utilisateur</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
+                <li class="toctree-l2"><a class="reference internal" href="../SSH_exploit_bases/">SSH</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../SMTP_exploit_bases/">SMTP</a>
                 </li>
@@ -187,9 +175,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
-          <li>Exploits &raquo;</li>
-          <li>Les protocoles &raquo;</li>
-      <li>SSH</li>
+          <li>Outils &raquo;</li>
+          <li>Nessus &raquo;</li>
+      <li>Les bases</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -198,49 +186,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="les-bases-des-exploits-ssh">Les bases des exploits SSH</h1>
-<h2 id="introduction">Introduction</h2>
-<p>Le protocole SSH (Secure Shell) est un protocole de communication sécurisé qui permet d'accéder à un ordinateur distant en utilisant un canal sécurisé entre un client et un serveur. Il est utilisé par les administrateurs système pour gérer à distance les systèmes et les applications, et par les utilisateurs pour accéder à distance aux ressources d'un réseau. Il est également utilisé pour transférer des fichiers d'un ordinateur à un autre sur un réseau.</p>
-<h2 id="connexion-en-ssh">Connexion en SSH</h2>
-<h3 id="connexion-en-ssh-avec-le-nom-dutilisateur">Connexion en SSH avec le nom d'utilisateur</h3>
-<p>Pour se connecter en SSH avec le nom d'utilisateur il suffit de rentrer la commande suivante :</p>
-<pre><code class="language-bash">ssh [USER]@[IP]
+                <h1 id="nessus">Nessus</h1>
+<h2 id="intro">Intro</h2>
+<p>Nessus est un scanner de vulnérabilités. Il permet de scanner un réseau et de trouver les failles de sécurité.
+Il utilise des techniques similaires à Nmap pour trouver et signaler les vulnérabilités, qui sont ensuite présentées dans une interface graphique agréable à consulter.
+Nessus est différent des autres scanners car il ne fait pas de suppositions lors de l'analyse, comme supposer que l'application web fonctionne sur le port 80 par exemple.</p>
+<p>Nessus propose un service gratuit et un service payant, dans lequel certaines fonctionnalités sont exclues du service gratuit pour vous inciter à acheter le service payant.
+Le prix est similaire à celui de Burp Suite, donc à moins que vous n'ayez un peu d'argent, nous utiliserons la version gratuite.</p>
+<p>Les prix sont ici : <a href="https://www.tenable.com/products/nessus">https://www.tenable.com/products/nessus</a></p>
+<h2 id="installation">Installation</h2>
+<p>Pour installer Nessus, rendez-vous sur le site officiel de Nessus et téléchargez la version appropriée pour votre système d'exploitation. Il faut aussi s'enrigistrer sur le site : <a href="https://www.tenable.com/products/nessus/nessus-essentials">nessus login</a></p>
+<h2 id="demarrage-de-nessus">Démarrage de Nessus</h2>
+<p>Pour démarrer Nessus, il suffit de lancer le service nessusd.service. Pour moi, c'est dans le dossier /bin/systemctl. Pour lancer le service, il faut utiliser la commande suivante :</p>
+<pre><code class="language-bash">sudo /bin/systemctl start nessusd.service
 </code></pre>
-<p>On peut aussi faire : </p>
-<pre><code class="language-bash">ssh [IP] -l [USER]
-</code></pre>
-<h3 id="connexion-en-ssh-avec-une-cle-privee">Connexion en SSH avec une clé privée</h3>
-<p>Pour se connecter en SSH avec une clé privée (typiquement un fichier "id_rsa" ) il suffit de rentrer la commande suivante :</p>
-<pre><code class="language-bash">ssh [USER]@[IP] -i [PATH]
-</code></pre>
-<p>Attention à bien changer le droit d'accès de la clé privée au préalable avec la commande suivante :</p>
-<pre><code class="language-bash">chmod 600 [PATH]
-</code></pre>
-<h2 id="le-port-de-base-ssh">Le port de base SSH</h2>
-<p>Le port de base SSH est le port 22. C'est du TCP/IP.</p>
-<h2 id="enumeration">Enumeration</h2>
-<h3 id="packet-necessaire">Packet nécessaire</h3>
-<p>Tout d'abord, il faut avoir le paquet openssh-client installé sur la machine. Pour cela, il suffit de rentrer la commande suivante :</p>
-<pre><code class="language-bash">sudo apt install openssh-client
-</code></pre>
-<h3 id="enumeration-des-utilisateurs">Enumération des utilisateurs</h3>
-<p>Pour lister les utilisateurs, il suffit de rentrer la commande suivante :</p>
-<pre><code class="language-bash">ssh [IP] -l [USER] -o PreferredAuthentications=none
-</code></pre>
-<h2 id="exploitation">Exploitation</h2>
-<h3 id="bruteforce-dun-utilisateur">Bruteforce d'un utilisateur</h3>
-<p>Si on connait un utilisateur, on peut essayer de bruteforce son mot de passe avec Hydra. Particulièrement s'il sagit d'un utilisateur commun comme "root" ou "admin".</p>
-<pre><code class="language-bash">hydra -t 16 -l [USERNAME] -P /usr/share/wordlists/rockyou.txt -vV [IP] ssh
-</code></pre>
-<p>Pour rappel :
-* <code>-t 16</code> : nombre de threads
-* <code>-P /usr/share/wordlists/rockyou.txt</code> : wordlist à utiliser</p>
+<p>Il suffit ensuite de se rendre sur firefox et de se connecter à l'adresse suivante : <a href="https://localhost:8834">https://localhost:8834</a></p>
+<h2 id="fonctionnement-de-nessus">Fonctionnement de Nessus</h2>
+<p>Nessus fonctionne en deux parties : un serveur et un client. Le serveur est le service que nous avons démarré précédemment. Le client est l'interface graphique que nous utilisons pour interagir avec le serveur.</p>
+<p>Le serveur est responsable de l'analyse des vulnérabilités et le client est responsable de la configuration de l'analyse et de l'affichage des résultats.</p>
+<h2 id="configuration-de-nessus">Configuration de Nessus</h2>
+<p>Pour configurer Nessus, il faut se rendre sur l'interface web et se connecter. Une fois connecté, il faut créer un utilisateur. Cet utilisateur sera utilisé pour se connecter à l'interface web et pour se connecter au serveur Nessus.</p>
+<p>Une fois l'utilisateur créé, il faut se connecter à l'interface web avec cet utilisateur. Une fois connecté, il faut créer un scan. Pour créer un scan, il faut cliquer sur le bouton "New Scan" en haut à gauche de l'interface web.</p>
+<h3 id="configuration-du-scan">Configuration du scan</h3>
+<p>Une fois le scan créé, il faut le configurer. Il faut lui donner un nom, une description et choisir le type de scan que l'on veut effectuer. Il existe plusieurs types de scan, mais nous utiliserons le scan "Basic Network Scan" pour l'instant.</p>
+<p>L'option "Policies" permet de créer des modèles personnalisés de scan.</p>
+<p>L'option "Plugin Rules" nous permet de modifier les propriétés des plugins, par exemple en les masquant ou en modifiant leur gravité</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../NFS_exploit_bases/" class="btn btn-neutral float-left" title="NFS"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../SMTP_exploit_bases/" class="btn btn-neutral float-right" title="SMTP">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../wireshark_bases/" class="btn btn-neutral float-left" title="Les bases"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../SMB_exploit_bases/" class="btn btn-neutral float-right" title="SMB">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -263,10 +239,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../NFS_exploit_bases/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../wireshark_bases/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../SMTP_exploit_bases/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../SMB_exploit_bases/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

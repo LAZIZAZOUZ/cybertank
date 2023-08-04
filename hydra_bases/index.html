@@ -290,7 +290,7 @@
 </table>
 <h2 id="exemples">Exemples</h2>
 <h3 id="ssh">SSH</h3>
-<pre><code class="language-bash">hydra -l root -P /usr/share/wordlists/rockyou.txt -t 4 -vV
+<pre><code class="language-bash">hydra -l &lt;username&gt; -P /usr/share/wordlists/rockyou.txt &lt;IP&gt; -vV ssh
 </code></pre>
 <h2 id="formulaires-web-avec-hydra">Formulaires Web avec Hydra</h2>
 <p>Nous pouvons également utiliser Hydra pour forcer les formulaires web. Vous devez savoir quel type de requête est effectué ; les méthodes GET ou POST sont couramment utilisées. Vous pouvez utiliser l'onglet réseau de votre navigateur (dans les outils de développement) pour voir les types de requêtes ou afficher le code source.</p>

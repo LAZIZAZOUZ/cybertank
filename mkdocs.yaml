@@ -23,6 +23,8 @@ nav:
       - Les bases : 'hydra_bases.md'
     - Wireshark :
       - Les bases : 'wireshark_bases.md'
+    - Nessus : 
+      - Les bases : 'nessus_bases.md'
     
 
   - Exploits :

@@ -43,7 +43,7 @@ TAG | Description
 ### SSH
 
 ```bash
-hydra -l root -P /usr/share/wordlists/rockyou.txt -t 4 -vV
+hydra -l <username> -P /usr/share/wordlists/rockyou.txt <IP> -vV ssh
 ```
 ## Formulaires Web avec Hydra
 

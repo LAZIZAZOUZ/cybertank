@@ -35,6 +35,10 @@ nav:
       - NFS : 'NFS_exploit_bases.md'
       - SSH : 'SSH_exploit_bases.md'
       - SMTP : 'SMTP_exploit_bases.md'
+    - Web : 
+      - Les bases : 'web_exploit_bases.md'
+    - Wifi :
+      - Wifi mdp cracking : 'wifi-cracking.md'
 
     - Autre services :
       - MySQL : 'MySQL_exploit_bases.md'
@@ -42,7 +46,8 @@ nav:
     - Les OS :
       - Windows : 'vide.md'
        
-      - Linux : 'vide.md'
+      - Linux : 
+        - Commandes utiles : 'linux_commandes_utiles.md'
         
 
 

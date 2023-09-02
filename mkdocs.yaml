@@ -25,30 +25,28 @@ nav:
       - Les bases : 'wireshark_bases.md'
     - Nessus : 
       - Les bases : 'nessus_bases.md'
-    
 
-  - Exploits :
-    - Les protocoles :
-      - SMB : 'SMB_exploit_bases.md'
-      - TELNET : 'TELNET_exploit_bases.md'
-      - FTP : 'FTP_exploit_bases.md'
-      - NFS : 'NFS_exploit_bases.md'
-      - SSH : 'SSH_exploit_bases.md'
-      - SMTP : 'SMTP_exploit_bases.md'
-    - Web : 
-      - Les bases : 'web_exploit_bases.md'
-    - Wifi :
-      - Wifi mdp cracking : 'wifi-cracking.md'
+  - Les protocoles :
+    - SMB : 'SMB_exploit_bases.md'
+    - TELNET : 'TELNET_exploit_bases.md'
+    - FTP : 'FTP_exploit_bases.md'
+    - NFS : 'NFS_exploit_bases.md'
+    - SSH : 'SSH_exploit_bases.md'
+    - SMTP : 'SMTP_exploit_bases.md'
+  - Web : 
+    - Les bases : 'web_exploit_bases.md'
+  - Wifi :
+    - Wifi mdp cracking : 'wifi-cracking.md'
 
-    - Autre services :
-      - MySQL : 'MySQL_exploit_bases.md'
+  - Autre services :
+    - MySQL : 'MySQL_exploit_bases.md'
 
-    - Les OS :
-      - Windows : 'vide.md'
-       
-      - Linux : 
-        - Commandes utiles : 'linux_commandes_utiles.md'
-        
+  - Les OS :
+    - Windows : 'vide.md'
+      
+    - Linux : 
+      - Commandes utiles : 'linux_commandes_utiles.md'
+      
 
 
   

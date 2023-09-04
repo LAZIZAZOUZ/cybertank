@@ -10,15 +10,18 @@ nav:
     - Ecoute de ports : 'ecoute_ports.md'
     - Les sites utiles : 'sites_utiles.md'
 
-  - Outils : 
+  - Reconnaissance : 
+    - Reconnaissance Passive : 'reconnaissance_passive.md'
     - Nmap : 
       - Les scans : 'nmap_bases_scan.md'
       - Utile : 'nmap_bases_utiles.md'
+  - Exploits :
     - Metasploit : 
       - Les bases : 'metasploit_bases.md'
       - Les exploits : 'metasploit_exploits.md'
       - Les shells : 'metasploit_msfvenom.md'
       - Les post-exploits : 'metasploit_meterpreter.md'
+  - Autres outils :
     - Hydra :
       - Les bases : 'hydra_bases.md'
     - Wireshark :

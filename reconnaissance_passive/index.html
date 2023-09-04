@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/SMTP_exploit_bases/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/reconnaissance_passive/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>SMTP - Cyber-puit de connaissances</title>
+    <title>Reconnaissance Passive - Cyber-puit de connaissances</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "SMTP";
-        var mkdocs_page_input_path = "SMTP_exploit_bases.md";
-        var mkdocs_page_url = "/SMTP_exploit_bases/";
+        var mkdocs_page_name = "Reconnaissance Passive";
+        var mkdocs_page_input_path = "reconnaissance_passive.md";
+        var mkdocs_page_url = "/reconnaissance_passive/";
       </script>
     
     <!--[if lt IE 9]>
@@ -51,8 +51,20 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Reconnaissance</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../reconnaissance_passive/">Reconnaissance Passive</a>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Reconnaissance Passive</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#whois">Whois</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#nslookup-et-dig">nslookup et dig</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#dig">dig</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#dnsdumpster">DNSDumpster</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#shodan">Shodan</a>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="#">Nmap</a>
     <ul>
@@ -100,7 +112,7 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Les protocoles</span></p>
-              <ul class="current">
+              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../SMB_exploit_bases/">SMB</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../TELNET_exploit_bases/">TELNET</a>
@@ -111,33 +123,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../SSH_exploit_bases/">SSH</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">SMTP</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#fonctionnement-succinct-du-protocole-smtp">Fonctionnement succinct du protocole SMTP</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#enumeration">Enumeration</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#ports-de-base-smtp">Ports de base SMTP</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#packet-necessaire">Packet nécessaire</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#commandes-internes-smtp">Commandes internes SMTP</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#enumeration-de-smtp">Enumération de SMTP</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#exploitation">Exploitation</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#bruteforce-dun-utilisateur">Bruteforce d'un utilisateur</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../SMTP_exploit_bases/">SMTP</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Web</span></p>
@@ -200,8 +186,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
-          <li>Les protocoles &raquo;</li>
-      <li class="breadcrumb-item active">SMTP</li>
+          <li>Reconnaissance &raquo;</li>
+      <li class="breadcrumb-item active">Reconnaissance Passive</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -210,47 +196,83 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="smtp-les-bases">SMTP : les bases</h1>
-<h2 id="introduction">Introduction</h2>
-<p>Le protocole SMTP (Simple Mail Transfer Protocol) est un protocole de communication utilisé pour transférer des messages électroniques entre des serveurs de messagerie. Il est utilisé pour envoyer des messages électroniques à partir d'un client de messagerie vers un serveur de messagerie et d'un serveur de messagerie vers un autre. Il est également utilisé pour transférer des messages électroniques entre différents serveurs de messagerie.</p>
-<h3 id="fonctionnement-succinct-du-protocole-smtp">Fonctionnement succinct du protocole SMTP</h3>
-<ol>
-<li>L'agent utilisateur de messagerie, qui est soit votre client de messagerie, soit un programme externe, se connecte au serveur SMTP de votre domaine, par exemple smtp.google.com. Ceci initie la poignée de main SMTP. Cette connexion fonctionne sur le port SMTP - qui est généralement 25. Une fois ces connexions établies et validées, la session SMTP démarre.</li>
-<li>Le processus d'envoi du courrier peut maintenant commencer. Le client soumet d'abord au serveur l'adresse électronique de l'expéditeur et du destinataire, le corps du message et les éventuelles pièces jointes.</li>
-<li>Le serveur SMTP vérifie ensuite si le nom de domaine du destinataire et celui de l'expéditeur sont identiques.</li>
-<li>Le serveur SMTP de l'expéditeur établit une connexion avec le serveur SMTP du destinataire avant de relayer le courrier électronique. Si le serveur du destinataire n'est pas accessible ou n'est pas disponible, l'e-mail est placé dans une file d'attente SMTP.</li>
-<li>Ensuite, le serveur SMTP du destinataire vérifie le courriel entrant. Pour ce faire, il vérifie si le domaine et le nom d'utilisateur ont été reconnus. Le serveur transfère ensuite le courriel au serveur POP ou IMAP, comme le montre le schéma ci-dessus.</li>
-<li>Le message s'affichera alors dans la boîte de réception du destinataire.</li>
-</ol>
-<p>Il s'agit d'une version très simplifiée du processus, et de nombreux sous-protocoles, communications et détails n'ont pas été inclus. Si vous souhaitez en savoir plus sur ce sujet, il s'agit d'une description très conviviale des détails techniques les plus fins - je l'ai d'ailleurs utilisée pour écrire cette description : <a href="https://computer.howstuffworks.com/e-mail-messaging/email3.htm">How SMTP works</a></p>
-<h2 id="enumeration">Enumeration</h2>
-<h3 id="ports-de-base-smtp">Ports de base SMTP</h3>
-<p>Le port de base SMTP est le port 25. C'est du TCP/IP.</p>
-<h3 id="packet-necessaire">Packet nécessaire</h3>
-<p>Des serveurs de messagerie mal configurés ou vulnérables peuvent souvent constituer un point d'ancrage initial dans un réseau, mais avant de lancer une attaque, nous voulons prendre l'empreinte du serveur afin de rendre notre ciblage aussi précis que possible. Pour ce faire, nous allons utiliser le module <strong>smtp_version</strong> de <strong>MetaSploit</strong>. Comme son nom l'indique, il analysera une plage d'adresses IP et déterminera la version de tous les serveurs de messagerie qu'il rencontrera.</p>
-<p>Il est intéressant de noter que cette technique d'énumération fonctionnera pour la majorité des configurations SMTP ; cependant, il existe d'autres outils <strong>non-metasploit</strong> tels que <strong>smtp-user-enum</strong> qui fonctionnent encore mieux pour énumérer les comptes utilisateurs au niveau du système d'exploitation sur Solaris via le service SMTP. L'énumération est réalisée en inspectant les réponses aux commandes VRFY, EXPN, et RCPT TO.</p>
-<h3 id="commandes-internes-smtp">Commandes internes SMTP</h3>
-<p>Le service SMTP dispose de deux commandes internes qui permettent d'énumérer les utilisateurs : <strong>VRFY</strong> (qui confirme les noms des utilisateurs valides) et <strong>EXPN</strong> (qui révèle l'adresse réelle des alias et des listes de courrier électronique de l'utilisateur (listes de diffusion). En utilisant ces commandes SMTP, nous pouvons révéler une liste d'utilisateurs valides</p>
-<h3 id="enumeration-de-smtp">Enumération de SMTP</h3>
-<p>Nous pouvons le faire manuellement, via une connexion telnet, mais Metasploit vient à nouveau à la rescousse, en fournissant un module pratique appelé <strong>smtp_enum</strong> qui fera le travail à notre place ! Pour utiliser le module, il suffit de lui fournir un hôte ou une plage d'hôtes à analyser et une liste de mots contenant des noms d'utilisateurs à énumérer.</p>
-<p>Pour la wordlist à utiliser pour tester les utilisateurs, nous pouvons utiliser la wordlist <strong>/usr/share/wordlists/metasploit/unix_users.txt</strong> qui contient une liste de noms d'utilisateurs courants.
-Mais j'ai utilisé seclist : <a href="https://github.com/danielmiessler/SecLists">seclist github</a></p>
-<pre><code class="language-bash">msf6 &gt; use auxiliary/scanner/smtp/smtp_enum
-msf6 auxiliary(scanner/smtp/smtp_enum) &gt; set RHOSTS [ip]
-RHOSTS =&gt; [ip]
-msf6 auxiliary(scanner/smtp/smtp_enum) &gt; set USER_FILE /usr/share/seclist/Usernames/top-usernames-shortlist.txt
-USER_FILE =&gt; /usr/share/seclist/Usernames/top-usernames-shortlist.txt
-msf6 auxiliary(scanner/smtp/smtp_enum) &gt; run
+                <h1 id="outils-de-reconnaissance-passive">Outils de reconnaissance passive</h1>
+<p>La reconnaissance passive consiste à rassembler des informations sur la cible sans directement se connecter avec elle. Cela se fait principalement en se connectant à des bases de données publiques. </p>
+<h2 id="whois">Whois</h2>
+<p>WHOIS est un protocole de demande et de réponse qui suit la spécification RFC 3912. Un serveur WHOIS écoute les demandes entrantes sur le port TCP 43. L'agent d'enregistrement du domaine est responsable de la mise à jour des enregistrements WHOIS pour les noms de domaine qu'il loue. Le serveur WHOIS répond en fournissant diverses informations relatives au domaine demandé. En particulier, nous pouvons apprendre ce qui suit :</p>
+<ul>
+<li>Registrar : Par l'intermédiaire de quel bureau d'enregistrement le nom de domaine a-t-il été enregistré ?</li>
+<li>Contact info of registrant : Nom, organisation, adresse, téléphone, entre autres. (sauf si elles sont cachées par un service de protection de la vie privée)</li>
+<li>Creation, update and expiration : Quand le nom de domaine a-t-il été enregistré pour la première fois ? Quand a-t-il été mis à jour pour la dernière fois ? Et quand doit-il être renouvelé ?</li>
+<li>Name Server : Quel est le serveur auquel il faut s'adresser pour résoudre le nom de domaine ?</li>
+</ul>
+<pre><code class="language-bash">whois google.com
 </code></pre>
-<h2 id="exploitation">Exploitation</h2>
-<h3 id="bruteforce-dun-utilisateur">Bruteforce d'un utilisateur</h3>
-<p>Une fois qu'on a obtenu l'id d'un utilisateur, si un port SSH ou autre est ouvert sur la machine, on peut essayer de le bruteforce avec Hydra par exemple.</p>
+<p>Grâce à <code>whois</code> on s'intéresse le plus souvent au serveur DNS utilisé. </p>
+<h2 id="nslookup-et-dig">nslookup et dig</h2>
+<p><code>nslookup</code>  signifie Name Server Look Up, ça permet de retrouver l'adresse IP d'un nom de domaine.</p>
+<p>La synthaxe est :</p>
+<pre><code class="language-bash">nslookup [option] [nom de domaine] [serveur DNS à interroger]
+</code></pre>
+<p>Les serveurs DNS les plus connus sont : 
+*  Cloudflare avec <code>1.1.1.1</code> et <code>1.0.0.1</code>
+*  Google avec <code>8.8.8.8</code> et <code>8.8.4.4</code>
+*  Quad9 avec <code>9.9.9.9</code> et <code>149.112.112.112</code></p>
+<p>Dans la partie <code>[option]</code> on peut choisir le type de résultat que l'on veut :</p>
+<table>
+<thead>
+<tr>
+<th>option</th>
+<th>effet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-type=A</td>
+<td>adresse IPv4</td>
+</tr>
+<tr>
+<td>-type=AAAA</td>
+<td>adresse IPv6</td>
+</tr>
+<tr>
+<td>-type=CNAME</td>
+<td>Nom Canonique</td>
+</tr>
+<tr>
+<td>-type=MX</td>
+<td>serveur mail</td>
+</tr>
+<tr>
+<td>-type=SOA</td>
+<td>"Start of Authority"</td>
+</tr>
+<tr>
+<td>-type=TXT</td>
+<td>TXT record</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dig">dig</h2>
+<p>Pour des requêtes DNS plus avancées et des fonctionnalités supplémentaires, on peut utiliser <code>dig</code> (Domain Information Groper)</p>
+<p>Comme pour <code>nslookup</code> on peut préciser un type mais pas besoin de mettre "-type=", par exemple :</p>
+<pre><code class="language-bash">dig test.com MX
+</code></pre>
+<p>Pour préciser le serveur DNS, on ajoute '@' :</p>
+<pre><code class="language-bash">dig @8.8.8.8 test.com MX
+</code></pre>
+<h2 id="dnsdumpster">DNSDumpster</h2>
+<p><a href="https://dnsdumpster.com/">DNSDumpster</a> est un site qui permet de lister un certains nombre de sous-domaines. Et de faire un rendu visuel du mappage du site.</p>
+<p>Les outils de recherche DNS, tels que nslookup et dig, ne peuvent pas trouver les sous-domaines seuls. Le domaine que vous inspectez peut inclure un sous-domaine différent qui peut révéler beaucoup d'informations sur la cible. Par exemple, si tryhackme.com possède les sous-domaines wiki.tryhackme.com et webmail.tryhackme.com, vous voudrez en savoir plus sur ces deux sous-domaines, car ils peuvent contenir une mine d'informations sur votre cible. Il est possible que l'un de ces sous-domaines ait été créé et ne soit pas mis à jour régulièrement. L'absence de mises à jour régulières entraîne généralement la vulnérabilité des services. </p>
+<h2 id="shodan">Shodan</h2>
+<p><a href="https://www.shodan.io/">Shodan</a> est un site internet qui peut être utile pour obtenir diverses informations sur le réseau du client, sans s'y connecter activement. En outre, du côté défensif, vous pouvez utiliser différents services de Shodan.io pour connaître les appareils connectés et exposés appartenant à votre organisation.</p>
+<p>Shodan.io essaie de se connecter à chaque appareil accessible en ligne pour construire un moteur de recherche de "choses" connectées, contrairement à un moteur de recherche de pages web. Dès qu'il obtient une réponse, il collecte toutes les informations relatives au service et les enregistre dans la base de données pour les rendre consultables.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../SSH_exploit_bases/" class="btn btn-neutral float-left" title="SSH"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../web_exploit_bases/" class="btn btn-neutral float-right" title="Les bases">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../sites_utiles/" class="btn btn-neutral float-left" title="Les sites utiles"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../nmap_bases_scan/" class="btn btn-neutral float-right" title="Les scans">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -273,10 +295,10 @@ msf6 auxiliary(scanner/smtp/smtp_enum) &gt; run
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../SSH_exploit_bases/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../sites_utiles/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../web_exploit_bases/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../nmap_bases_scan/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

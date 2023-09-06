@@ -6,11 +6,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://cyber-puit-de-connaissances.com/Ecoute_ports/</loc>
-         <lastmod>2023-09-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://cyber-puit-de-connaissances.com/FTP_exploit_bases/</loc>
          <lastmod>2023-09-04</lastmod>
          <changefreq>daily</changefreq>
@@ -52,6 +47,11 @@
     </url>
     <url>
          <loc>https://cyber-puit-de-connaissances.com/changer_DNS_windows/</loc>
+         <lastmod>2023-09-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cyber-puit-de-connaissances.com/ecoute_ports/</loc>
          <lastmod>2023-09-04</lastmod>
          <changefreq>daily</changefreq>
     </url>

@@ -66,6 +66,10 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#scan-syn-scan-de-base-de-nmap-en-sudo">Scan SYN (scan de base de Nmap en sudo)</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#scan-tcp-ack-sa">Scan TCP ACK -sA</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#scan-tcp-windows-sw">scan TCP Windows -sW</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#scan-udp">Scan UDP</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#ameliorer-la-rapidite-du-scan">Améliorer la rapidité du scan</a>
@@ -80,7 +84,13 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#scan-xmas-sx">Scan Xmas -sX</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#scan-maimon-sm">Scan Maimon -sM</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#scan-personnalises">Scan personnalisés</a>
+    </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#amelioration-des-performances">Amélioration des performances</a>
     </li>
     </ul>
                 </li>
@@ -218,15 +228,35 @@
 </code></pre>
 <p>Pour voir tous les switchs disponibles. </p>
 <p>Une autre manière d'avoir des infos est d'aller sur : <a href="https://nmap.org/book/">le site officiel nmap</a></p>
+<p>Le comportement par défaut de Nmap est d'utiliser les hôtes en ligne par reverse-DNS. Parce que les noms d'hôtes peuvent révéler beaucoup de choses, cette étape peut être utile. Cependant, si vous ne voulez pas envoyer de telles requêtes DNS, vous pouvez utiliser l'option <code>-n</code> pour sauter cette étape.</p>
+<p>Par défaut, Nmap recherche les hôtes en ligne ; cependant, vous pouvez utiliser l'option <code>-R</code> pour interroger le serveur DNS même pour les hôtes hors ligne. Si vous voulez utiliser un serveur DNS spécifique, vous pouvez ajouter l'option <code>--dns-servers DNS_SERVER</code>.</p>
 <h2 id="scan-du-reseau">Scan du réseau</h2>
 <p>Pour commencer et avoir une vue d'ensemble du réseau le mieux est de connaitre les IPs des machines actives sur le réseau local. Pour faire ça on peut demander à nmap de faire un scan de type ping (protocole ICMP) en utilisant <code>-sn</code>.
 Il faut donner  le masque du réseau sur lequel il va faire son scan avec un /24 (ou /16 ou /8 ou autre) avec l'ip du broadcast ou alors mettre des * :</p>
-<pre><code>nmap -sn -vv 192.168.0.0-254
+<pre><code class="language-bash">nmap -sn -vv 192.168.0.0-254
 nmap -sn -vv 192.168.0.0/24
 nmap -sn -vv 192.168.0.*
 </code></pre>
 <p>Pro tip : pour n'afficher que les hosts qui sont up on peut associer à la commande nmap : <code>grep -v "down"</code> qui demande de ne pas afficher toutes les lignes où il y a marqué "down"</p>
 <p>Rappel, le <code>-vv</code> c'est pour verbosity c'est pour que les résultats soient affichés avec plus de détails. <code>-v</code> donne un niveau de détail, <code>-vv</code> en donne 2.</p>
+<p>Cependant, bien qu'il s'agisse de l'approche la plus simple, elle n'est pas toujours fiable. De nombreux pare-feu bloquent l'écho ICMP ; les nouvelles versions de MS Windows sont configurées avec un pare-feu hôte qui bloque par défaut les demandes d'écho ICMP. N'oubliez pas qu'une requête ARP précédera la requête ICMP si votre cible se trouve sur le même sous-réseau.</p>
+<pre><code class="language-bash">nmap -PE -sn MACHINE_IP/24
+</code></pre>
+<p>Comme les requêtes ICMP echo ont tendance à être bloquées, vous pouvez aussi considérer les requêtes ICMP Timestamp ou ICMP Address Mask pour savoir si un système est en ligne. Nmap utilise les requêtes d'horodatage (ICMP Type 13) et vérifie s'il obtiendra une réponse d'horodatage (ICMP Type 14). L'ajout de l'option <code>-PP</code> indique à Nmap d'utiliser les requêtes ICMP d'horodatage.</p>
+<pre><code class="language-bash">nmap -PP -sn MACHINE_IP/24
+</code></pre>
+<p>De la même manière, Nmap utilise des requêtes de masque d'adresse (ICMP Type 17) et vérifie s'il reçoit une réponse de masque d'adresse (ICMP Type 18). Ce scan peut être activé avec l'option <code>-PM</code>. </p>
+<pre><code class="language-bash">nmap -PM -sn MACHINE_IP/24
+</code></pre>
+<p>Si vous voulez que Nmap utilise le <strong>TCP SYN ping</strong>, vous pouvez le faire via l'option <code>-PS</code> suivie du numéro de port, de la plage, de la liste, ou d'une combinaison de ceux-ci. Par exemple, <code>-PS21</code> ciblera le port 21, tandis que <code>-PS21-25</code> ciblera les ports 21, 22, 23, 24 et 25. Enfin, <code>-PS80,443,8080</code> ciblera les trois ports 80, 443 et 8080.</p>
+<pre><code class="language-bash">nmap -PS -sn MACHINE_IP/24
+</code></pre>
+<p>Pour faire un <strong>TCP ACK ping</strong> c'est le même principe mais il faut mettre <code>-PA</code>. Ça enverra un packet avec le flag 'ACK' d'activé.</p>
+<pre><code class="language-bash">sudo nmap -PA -sn MACHINE_IP/24
+</code></pre>
+<p>Enfin, nous pouvons utiliser UDP pour savoir si l'hôte est en ligne <code>-PU</code>. Contrairement au TCP SYN ping, l'envoi d'un paquet UDP à un port ouvert ne devrait pas donner lieu à une réponse. En revanche, si nous envoyons un paquet UDP à un port UDP fermé, nous nous attendons à recevoir un paquet ICMP de port inaccessible, ce qui indique que le système cible est en ligne et disponible.</p>
+<pre><code class="language-bash">sudo nmap -PU -sn MACHINE_IP/24
+</code></pre>
 <h2 id="les-scans-basiques-et-moins-basiques">Les scans basiques et moins basiques</h2>
 <p>Les scans basiques :
 * Scan de connexion TCP : <code>-sT</code>
@@ -252,6 +282,10 @@ nmap -sn -vv 192.168.0.*
 * Les services instables sont parfois interrompus par les analyses SYN, ce qui peut s'avérer problématique si un client a fourni un environnement de production pour le test.</p>
 <p>En définitive, les avantages l'emportent sur les inconvénients.</p>
 <p>Pour cette raison, les scans SYN sont les scans par défaut utilisés par Nmap s'il est exécuté avec les permissions sudo. S'il est exécuté sans les permissions sudo, Nmap utilise par défaut le scan TCP Connect que nous avons vu dans la tâche précédente</p>
+<h2 id="scan-tcp-ack-sa">Scan TCP ACK <code>-sA</code></h2>
+<p>Simplement, comme son nom l'indique ça envoie un paquet avec le flag ACK. La cible devrait répondre avec un paquet RST</p>
+<h2 id="scan-tcp-windows-sw">scan TCP Windows <code>-sW</code></h2>
+<p>Une autre analyse similaire est l'analyse de la fenêtre TCP. L'analyse de la fenêtre TCP est presque identique à l'analyse ACK, mais elle examine le champ TCP Window des paquets RST renvoyés. Sur certains systèmes, cela peut révéler que le port est ouvert. Vous pouvez sélectionner ce type d'analyse avec l'option -sW. </p>
 <h2 id="scan-udp">Scan UDP</h2>
 <p>Les scans UDP sont très lent car le protocole UDP est fait pour la rapidité et n'a pas "d'accusé de réception", on peut connaitre les ports fermés mais on ne peut pas différencier les ports ouverts de ceux bloqués par firewall (et qui drop les paquets). On l'active avec <code>-sU</code>.</p>
 <p>Lorsqu'un paquet est envoyé à un port UDP ouvert, il ne devrait pas y avoir de réponse. Lorsque cela se produit, Nmap se réfère au port comme étant ouvert|filtré. En d'autres termes, il suspecte que le port est ouvert, mais qu'il pourrait être protégé par un pare-feu. S'il obtient une réponse UDP (ce qui est très inhabituel), le port est marqué comme ouvert. Le plus souvent, il n'y a pas de réponse, auquel cas la demande est envoyée une deuxième fois pour une double vérification. S'il n'y a toujours pas de réponse, le port est marqué comme ouvert|filtré et Nmap continue.</p>
@@ -272,11 +306,36 @@ Attention, en pratique Microsoft Windows (et un grand nombre de dispositifs de r
 <p>Le scan envoie une requête TCP avec uniquement le bit de "FIN" d'activé et s'attend à une réponse RST.</p>
 <h3 id="scan-xmas-sx">Scan Xmas <code>-sX</code></h3>
 <p>Le scan envoie un reqête TCP avec les bits Urgent(URG), Push (PSH) et Fin (FIN) d'activés</p>
+<h3 id="scan-maimon-sm">Scan Maimon <code>-sM</code></h3>
+<p>Dans ce scan les bits FIN et ACK sont activés. La cible devrait renvoyer un packet RST. <strong>Ce scan ne devrait pas fonctionner sur les réseaux récents</strong>.</p>
+<h3 id="scan-personnalises">Scan personnalisés</h3>
+<p>On peut customiser les flags TCP envoyés avec <code>--scanflags</code>. Il suffit de rajouter les flags que l'on souhaite avoir activé simultanément : SYN, RST, FIN ou autre.</p>
+<pre><code class="language-bash">sudo nmap --scanflags SYNRSTFIN
+</code></pre>
 <h4 id="rappel-sur-la-structure-dun-flag-tcpip">Rappel sur la structure d'un flag TCP/IP :</h4>
 <p>3 octets composés de : 
 * 3 bits réservés - 1 bit "Nonce"
 * 1 bit CWR (Congestion Windows Reduced) - 1 bit  ECN (Echo) - 1 bit URG (Urgent) - 1 bit ACK (Acknoledgement)
 * 1 bit PSH (Push) - 1 bit RST (Reset) - 1 bit SYN (Synchronisation) - 1 bit FIN </p>
+<h2 id="amelioration-des-performances">Amélioration des performances</h2>
+<p>Vous pouvez spécifier les ports que vous souhaitez analyser au lieu des 1000 ports par défaut. La spécification des ports est maintenant intuitive. Voyons quelques exemples :</p>
+<ul>
+<li>liste des ports : <code>-p22,80,443</code> pour scanner les ports 22, 80 et 443.</li>
+<li>plage de ports : <code>-p1-1023</code> analysera tous les ports compris entre 1 et 1023 inclus, tandis que <code>-p20-25</code> analysera les ports compris entre 20 et 25 inclus.</li>
+</ul>
+<p>Vous pouvez demander l'analyse de tous les ports en utilisant <code>-p-</code>, qui analysera les <strong>65535</strong> ports. Si vous souhaitez analyser les 100 ports les plus courants, ajoutez <code>-F</code>. L'utilisation de <code>--top-ports 10</code> vérifiera les dix ports les plus courants.</p>
+<p>Vous pouvez contrôler la durée de l'analyse en utilisant <code>-T&lt;0-5&gt;</code>. <code>-T0</code> est le plus lent (paranoïaque), tandis que <code>-T5</code> est le plus rapide. Selon la page de manuel de Nmap, il existe six modèles :</p>
+<ul>
+<li>paranoïaque (0)</li>
+<li>sournois (1)</li>
+<li>poli (2)</li>
+<li>normal (3)</li>
+<li>agressif (4)</li>
+<li>fou (5)</li>
+</ul>
+<p>Pour éviter les alertes IDS, vous pouvez opter pour <code>-T0</code> ou <code>-T1</code>. Par exemple, <code>-T0</code> scanne un port à la fois et <strong>attend 5 minutes</strong> entre l'envoi de chaque sonde, ce qui vous permet de deviner combien de temps le scan d'une cible prendra pour se terminer. Si vous ne spécifiez pas de timing, <strong>Nmap utilise la méthode normale</strong> <code>-T3</code>. Notez que <code>-T5</code> est le plus agressif en termes de vitesse ; cependant, cela peut affecter la précision des résultats de l'analyse en raison de la probabilité accrue de perte de paquets. Notez que <code>-T4</code> est souvent <strong>utilisé pendant les CTF</strong> et lors de l'apprentissage du balayage sur des cibles d'entraînement, alors que <code>-T1</code> est souvent <strong>utilisé pendant les engagements réels</strong> où la furtivité est plus importante.</p>
+<p>Vous pouvez également choisir de contrôler le taux de paquets en utilisant <code>--min-rate &lt;nombre&gt;</code> et <code>--max-rate &lt;nombre&gt;</code>. Par exemple,<code>--max-rate 10</code> ou <code>--max-rate=10</code> garantit que votre scanner n'envoie pas plus de dix paquets par seconde.</p>
+<p>De plus, vous pouvez contrôler la parallélisation des sondages en utilisant<code>--min-parallelism &lt;numprobes&gt;</code> et <code>--max-parallelism &lt;numprobes&gt;</code>. Nmap sonde les cibles pour découvrir quels hôtes sont actifs et quels ports sont ouverts ; le parallélisme des sondes spécifie le nombre de sondes qui peuvent être exécutées en parallèle. Par exemple, -<code>-min-parallelism=512</code> pousse Nmap à maintenir au moins 512 sondes en parallèle ; ces 512 sondes sont liées à la découverte des hôtes et des ports ouverts.</p>
               
             </div>
           </div><footer>

@@ -106,7 +106,7 @@ Simplement, comme son nom l'indique ça envoie un paquet avec le flag ACK. La ci
 
 ## scan TCP Windows `-sW`
 
-Une autre analyse similaire est l'analyse de la fenêtre TCP. L'analyse de la fenêtre TCP est presque identique à l'analyse ACK, mais elle examine le champ TCP Window des paquets RST renvoyés. Sur certains systèmes, cela peut révéler que le port est ouvert. Vous pouvez sélectionner ce type d'analyse avec l'option -sW. 
+Une autre analyse similaire est l'analyse de la fenêtre TCP. L'analyse de la fenêtre TCP est presque identique à l'analyse ACK, mais elle examine le champ TCP Window des paquets RST renvoyés. Sur certains systèmes, cela peut révéler que le port est ouvert. Vous pouvez sélectionner ce type d'analyse avec l'option `-sW`. 
 
 ## Scan UDP
 
@@ -142,6 +142,12 @@ Le scan envoie une requête TCP avec uniquement le bit de "FIN" d'activé et s'a
 
 Le scan envoie un reqête TCP avec les bits Urgent(URG), Push (PSH) et Fin (FIN) d'activés
 
+### Fragmenter les paquets
+
+Nmap propose l'option `-f` pour fragmenter les paquets. Une fois choisie, les données IP seront divisées en 8 octets ou moins. L'ajout d'un autre `-f` (`-f -f `ou `-ff`) divisera les données en fragments de 16 octets au lieu de 8. Vous pouvez changer la valeur par défaut en utilisant l'option `--mtu` ; cependant, vous devriez toujours choisir un **multiple de 8**.
+
+## Autres scans
+
 ### Scan Maimon `-sM`
 
 Dans ce scan les bits FIN et ACK sont activés. La cible devrait renvoyer un packet RST. **Ce scan ne devrait pas fonctionner sur les réseaux récents**.
@@ -154,12 +160,87 @@ On peut customiser les flags TCP envoyés avec `--scanflags`. Il suffit de rajou
 sudo nmap --scanflags SYNRSTFIN
 ```
 
-#### Rappel sur la structure d'un flag TCP/IP :
+## Spoofing/Leurres avec Nmap 
+
+### Spoof de l'IP `-S`
+
+Dans certaines configurations de réseau, il est possible d'analyser un système cible en utilisant une adresse IP ou même une adresse MAC usurpée. Ce type d'analyse n'est utile que dans les cas où vous pouvez garantir la capture de la réponse. Si vous essayez de scanner une cible à partir d'un réseau aléatoire en utilisant une adresse IP usurpée, il y a de fortes chances qu'aucune réponse ne vous soit acheminée et que les résultats du scan ne soient pas fiables.
+
+En gros nmap va construire ses requêtes en mettant l'adresse spoofée donc les réponses seront envoyées à l'adresse en question. Il faut donc avoir accès à la machine spoofé ou trouver un moyen de rediriger les paquets de réponse après coup.
+
+La commande se lance comme suit : 
+
+```bash
+nmap -S [spoofed IP] [IP cible]
+```
+
+En général, vous devez spécifier l'interface réseau à l'aide de `-e` et **désactiver explicitement le balayage ping** `-Pn`. 
+Par conséquent, au lieu de :
+```bash 
+nmap -S SPOOFED_IP MACHINE_IP
+```
+Vous devrez lancer :
+```bash
+nmap -e NET_INTERFACE -Pn -S SPOOFED_IP MACHINE_IP 
+``` 
+Pour indiquer explicitement à Nmap l'interface réseau à utiliser et ne pas s'attendre à recevoir une réponse ping. Il convient de répéter que ce scan sera inutile si le système de l'attaquant ne peut pas surveiller le réseau pour obtenir des réponses.
+
+### Spoof MAC
+
+Si vous vous trouvez sur le même sous-réseau que la machine cible, vous pouvez également usurper votre adresse MAC. Vous pouvez spécifier l'adresse MAC source en utilisant `--spoof-mac SPOOFED_MAC`. Cette usurpation d'adresse n'est possible que si l'attaquant et la machine cible se trouvent sur **le même réseau Ethernet (802.3)** ou **le même réseau WiFi (802.11)**.
+
+L'usurpation d'adresse ne fonctionne que dans un nombre minimal de cas où certaines conditions sont remplies. C'est pourquoi l'attaquant peut avoir recours à des leurres pour rendre plus difficile son repérage. Le concept est simple : **faire en sorte que le balayage semble provenir de plusieurs adresses IP**, de sorte que l'adresse IP de l'attaquant se perde parmi elles. Comme le montre la figure ci-dessous, le balayage de la machine cible semblera provenir de trois sources différentes et, par conséquent, les réponses iront également aux leurres.
+
+### Leurres 
+
+Vous pouvez lancer un balayage leurre en spécifiant une adresse IP spécifique ou aléatoire après `-D`. Par exemple :
+```bash 
+nmap -D 10.10.0.1,10.10.0.2,ME CIBLE_IP
+``` 
+Fera apparaître le scan de MACHINE_IP comme provenant des adresses IP 10.10.0.1, 10.10.0.2, puis ME pour indiquer que votre adresse IP doit apparaître dans le troisième ordre. Un autre exemple de commande serait :
+```bash
+nmap -D 10.10.0.1,10.10.0.2,RND,RND,ME CIBLE_IP
+```
+Où les troisième et quatrième adresses IP sources sont attribuées de manière aléatoire, tandis que la cinquième source sera l'adresse IP de l'attaquant. En d'autres termes, chaque fois que vous exécutez cette dernière commande, vous devez vous attendre à ce que deux nouvelles adresses IP aléatoires soient les troisième et quatrième sources du leurre.
+
+### Scan Zombie
+
+L'usurpation de l'adresse IP source peut être une excellente approche pour effectuer un balayage furtif. Cependant, l'usurpation ne fonctionne que dans des configurations de réseau spécifiques. Elle nécessite que vous soyez dans une position où vous pouvez surveiller le trafic. Compte tenu de ces limites, l'usurpation d'adresse IP n'a que peu d'intérêt ; cependant, nous pouvons l'améliorer grâce à l'analyse au ralenti/scan zombie.
+
+L'idle scan, ou zombie scan, nécessite un système inactif connecté au réseau avec lequel vous pouvez communiquer. En pratique, Nmap fera en sorte que chaque sonde semble provenir de l'hôte inactif (zombie), puis il vérifiera si l'hôte inactif (zombie) a reçu une réponse à la sonde usurpée. Pour ce faire, il vérifie la valeur d'identification IP (IP ID) dans l'en-tête IP. Vous pouvez lancer une analyse d'inactivité en utilisant :
+```bash
+nmap -sI ZOMBIE_IP MACHINE_IP
+``` 
+
+Où ZOMBIE_IP est l'adresse IP de l'hôte inactif (zombie).
+
+L'analyse de l'hôte inactif (zombie) nécessite les trois étapes suivantes pour déterminer si un port est ouvert :
+
+1. Déclencher la réponse de l'hôte inactif afin d'enregistrer l'ID IP actuel de l'hôte inactif.
+2. Envoyez un paquet SYN à un port TCP de la cible. Le paquet doit être usurpé pour donner l'impression qu'il provient de l'adresse IP de l'hôte inactif (zombie).
+3. Déclenchez une nouvelle réponse de la machine inactive afin que vous puissiez comparer la nouvelle ID IP avec celle reçue précédemment.
+
+Expliquons cela à l'aide de chiffres. Imaginons, le système attaquant sonde une machine inactive, une imprimante multifonction. En envoyant un SYN/ACK, il répond par un paquet RST contenant son ID IP nouvellement incrémenté.
+
+L'attaquant enverra un paquet SYN au port TCP qu'il veut vérifier sur la machine cible à l'étape suivante. 
+
+Cependant, ce paquet utilisera l'adresse IP de l'hôte inactif (zombie) comme source. Trois scénarios se présentent alors. 
+1. Dans le premier scénario, le port TCP est fermé ; par conséquent, la machine cible répond à l'hôte inactif par un paquet RST. L'hôte inactif ne répond pas ; son ID IP n'est donc pas incrémenté.
+2. Dans le second scénario, le port TCP est ouvert, de sorte que la machine cible répond par un SYN/ACK à l'hôte inactif (zombie). L'hôte inactif répond à ce paquet inattendu par un paquet RST, incrémentant ainsi son ID IP.
+3. Dans le troisième scénario, la machine cible ne répond pas du tout en raison des règles du pare-feu. Cette absence de réponse aboutira au même résultat que dans le cas d'un port fermé : l'hôte inactif n'augmentera pas l'ID IP.
+
+Pour la dernière étape, l'attaquant envoie un autre SYN/ACK à l'hôte inactif. L'hôte inactif répond par un paquet RST, incrémentant à nouveau l'ID IP d'une unité. L'attaquant doit comparer l'ID IP du paquet RST reçu lors de la première étape avec l'ID IP du paquet RST reçu lors de cette troisième étape. Si la différence est de 1, cela signifie que le port de la machine cible a été fermé ou filtré. En revanche, si la différence est de 2, cela signifie que le port de la machine cible était ouvert.
+
+Il convient de répéter que cette analyse est appelée **"idle scan"**, car le choix d'un hôte inactif est indispensable à la précision de l'analyse. **Si l'"hôte inactif" est occupé, tous les identifiants IP renvoyés seront inutiles.**
+
+## Rappel sur la structure d'un flag TCP/IP :
 
 3 octets composés de : 
 * 3 bits réservés - 1 bit "Nonce"
 * 1 bit CWR (Congestion Windows Reduced) - 1 bit  ECN (Echo) - 1 bit URG (Urgent) - 1 bit ACK (Acknoledgement)
 * 1 bit PSH (Push) - 1 bit RST (Reset) - 1 bit SYN (Synchronisation) - 1 bit FIN 
+
+# Améliorations possibles 
 
 ## Amélioration des performances 
 
@@ -184,3 +265,9 @@ Pour éviter les alertes IDS, vous pouvez opter pour `-T0` ou `-T1`. Par exemple
 Vous pouvez également choisir de contrôler le taux de paquets en utilisant `--min-rate <nombre>` et `--max-rate <nombre>`. Par exemple,` --max-rate 10` ou `--max-rate=10` garantit que votre scanner n'envoie pas plus de dix paquets par seconde.
 
 De plus, vous pouvez contrôler la parallélisation des sondages en utilisant` --min-parallelism <numprobes>` et `--max-parallelism <numprobes>`. Nmap sonde les cibles pour découvrir quels hôtes sont actifs et quels ports sont ouverts ; le parallélisme des sondes spécifie le nombre de sondes qui peuvent être exécutées en parallèle. Par exemple, -`-min-parallelism=512` pousse Nmap à maintenir au moins 512 sondes en parallèle ; ces 512 sondes sont liées à la découverte des hôtes et des ports ouverts.
+
+## Améliorer les détails du scan 
+
+* Vous pouvez envisager d'ajouter `--reason` si vous voulez que Nmap fournisse plus de détails sur son raisonnement et ses conclusions. 
+* Pour plus de détails en sortie, on peut ajouter `-v` pour verbose ou `-vv` pour deux niveaux de verbose.
+* On peut ajouter `-d` pour avoir des détails de débuggage ou `-dd` pour encore plus de détails.

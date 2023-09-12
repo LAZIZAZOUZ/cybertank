@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/injections_bash/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Les injections en bash - Cyber-puit de connaissances</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Les injections en bash";
+        var mkdocs_page_input_path = "injections_bash.md";
+        var mkdocs_page_url = "/injections_bash/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Cyber-puit de connaissances
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../accueil/">Accueil</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Utile</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ecoute_ports/">Ecoute de ports</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sites_utiles/">Les sites utiles</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reconnaissance</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../reconnaissance_passive/">Reconnaissance Passive</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Nmap</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../nmap_bases_scan/">Les scans</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../nmap_bases_utiles/">Utile</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Exploits</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Metasploit</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../metasploit_bases/">Les bases</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../metasploit_exploits/">Les exploits</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../metasploit_msfvenom/">Les shells</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../metasploit_meterpreter/">Les post-exploits</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Autres outils</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Hydra</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../hydra_bases/">Les bases</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Wireshark</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../wireshark_bases/">Les bases</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Nessus</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../nessus_bases/">Les bases</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Les protocoles</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../SMB_exploit_bases/">SMB</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../TELNET_exploit_bases/">TELNET</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../FTP_exploit_bases/">FTP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../NFS_exploit_bases/">NFS</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../SSH_exploit_bases/">SSH</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../SMTP_exploit_bases/">SMTP</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Web</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../web_exploit_bases/">Les bases</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Wifi</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../wifi-cracking/">Wifi mdp cracking</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Autre services</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../MySQL_exploit_bases/">MySQL</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Les OS</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../vide/">Windows</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Linux</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../linux_commandes_utiles/">Commandes utiles</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Réseau</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../changer_DNS_windows/">Changer DNS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Système</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="#">BIOS</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="#">Accès au hardware</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../reset_mdp_BIOS_hardware_PC_fixe/">PC fixe</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reset_mdp_BIOS_hardware_PC_portable/">PC portable</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Cyber-puit de connaissances</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+      <li class="breadcrumb-item active">Les injections en bash</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="les-injections-en-bash">Les injections en bash</h1>
+<h2 id="introduction">Introduction</h2>
+<p>L'injection de commande se produit lorsque le code côté serveur (comme PHP) dans une application web fait un appel à une fonction qui interagit directement avec la console du serveur. Une vulnérabilité de type injection de commande permet à un pirate de tirer parti de cet appel pour exécuter des commandes du système d'exploitation de manière arbitraire sur le serveur. Les possibilités pour l'attaquant sont infinies : il peut lister des fichiers, lire leur contenu, exécuter des commandes de base pour faire de la reconnaissance sur le serveur ou tout ce qu'il veut, comme s'il était assis devant le serveur et émettait des commandes directement dans la ligne de commande.</p>
+<p>L'injection est une vulnérabilité OWASP du top 10 bien connue.</p>
+<h2 id="les-commandes-inline">Les commandes "inline"</h2>
+<h3 id="contexte-de-linjection">Contexte de l'injection</h3>
+<p>Imaginons que l'on remarque qu'un code php exécute une commande du type :</p>
+<pre><code class="language-php">&lt;?php
+passthru(&quot;perl /usr/bin/cowsay -f $variable_de_lutilisateur&quot;);
+?&gt;
+</code></pre>
+<p>La fonction <code>passthru</code> exécute simplement une commande dans la console du système d'exploitation et renvoie la sortie au navigateur de l'utilisateur. Vous pouvez voir que notre commande est formée par la concaténation de la variables $mooing à la fin de celle-ci. Puisque nous pouvons manipuler cette variable, nous pouvons essayer d'injecter des commandes supplémentaires en utilisant des astuces simples. </p>
+<h3 id="injection-de-commandes">Injection de commandes</h3>
+<p>Maintenant que nous savons comment l'application fonctionne , nous allons tirer parti d'une fonctionnalité de Bash appelée "commandes en ligne" pour abuser du serveur Cowsay et exécuter n'importe quelle commande arbitraire. Bash vous permet d'exécuter des commandes à l'intérieur de commandes. Cette fonctionnalité est utile pour de nombreuses raisons, mais dans notre cas, elle sera utilisée pour injecter une commande dans le serveur Cowsay afin de la faire exécuter.</p>
+<p>Pour exécuter des commandes inline, il suffit de les enfermer dans le format suivant <code>$(votre_commande_ici)</code>. Si la console détecte une commande inline, elle <strong>l'exécutera d'abord</strong> et utilisera ensuite le résultat comme paramètre de la commande externe. </p>
+<p>Les commandes les plus pratiques à injecter peuvent être trouvées dans l'onglet <a href="https://lazizazouz.github.io/cybertank/linux_commandes_utiles/">commandes utiles</a>.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -15,12 +15,18 @@ nav:
     - Nmap : 
       - Les scans : 'nmap_bases_scan.md'
       - Utile : 'nmap_bases_utiles.md'
+
   - Exploits :
     - Metasploit : 
       - Les bases : 'metasploit_bases.md'
       - Les exploits : 'metasploit_exploits.md'
       - Les shells : 'metasploit_msfvenom.md'
       - Les post-exploits : 'metasploit_meterpreter.md'
+    - Injections : 
+      - SQL : 'injections_SQL.md'
+      - XSS : 'injections_XSS.md'
+      - Bash : 'injections_bash.md'
+
   - Autres outils :
     - Hydra :
       - Les bases : 'hydra_bases.md'
@@ -36,8 +42,10 @@ nav:
     - NFS : 'NFS_exploit_bases.md'
     - SSH : 'SSH_exploit_bases.md'
     - SMTP : 'SMTP_exploit_bases.md'
+
   - Web : 
     - Les bases : 'web_exploit_bases.md'
+
   - Wifi :
     - Wifi mdp cracking : 'wifi-cracking.md'
 

@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/accueil/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/injections_SQL/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Accueil - Cyber-puit de connaissances</title>
+    <title>SQL - Cyber-puit de connaissances</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Accueil";
-        var mkdocs_page_input_path = "accueil.md";
-        var mkdocs_page_url = "/accueil/";
+        var mkdocs_page_name = "SQL";
+        var mkdocs_page_input_path = "injections_SQL.md";
+        var mkdocs_page_url = "/injections_SQL/";
       </script>
     
     <script src="../js/jquery-3.6.0.min.js" defer></script>
@@ -40,10 +40,8 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Accueil</a>
-    <ul class="current">
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../accueil/">Accueil</a>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Utile</span></p>
@@ -67,7 +65,7 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Exploits</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="#">Metasploit</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../metasploit_bases/">Les bases</a>
@@ -80,9 +78,29 @@
                 </li>
     </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Injections</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../injections_SQL/">SQL</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Injections</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">SQL</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#injection-sql-dans-un-formulaire-de-connexion">Injection SQL dans un formulaire de connexion</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#contexte-de-linjection">Contexte de l'injection</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#injection-sql">Injection SQL</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#injection-sql-via-requete-get-http">Injection SQL via requête GET (HTTP)</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#contexte-de-linjection_1">Contexte de l'injection</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#requete-union">Requête Union</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
                 <li class="toctree-l2"><a class="" href="../injections_XSS.md">XSS</a>
                 </li>
@@ -187,7 +205,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
-      <li>Accueil</li>
+          <li>Exploits &raquo;</li>
+          <li>Injections &raquo;</li>
+      <li>SQL</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -196,13 +216,70 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="puit-de-connaissance-en-cyber">Puit de connaissance en Cyber</h1>
-<p>Bienvenue sur mon petit site statique local pour rassembler toutes les connaissances que je peux avoir en Cyber</p>
+                <h1 id="les-injections-sql">Les injections SQL</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Il y a beaucoup à dire sur les injections SQL, je ne reviens pas sur le principe de base mais chaque injection est un peu unique. Il y a beaucoup de façons d'exploiter une injection SQL, et il y a beaucoup de façons de la trouver. Je vais vous montrer quelques techniques pour trouver des injections SQL et comment les exploiter en fonction de ce que j'ai rencontré.</p>
+<h2 id="injection-sql-dans-un-formulaire-de-connexion">Injection SQL dans un formulaire de connexion</h2>
+<h3 id="contexte-de-linjection">Contexte de l'injection</h3>
+<p>Imaginons que l'on remarque qu'un code php exécute une requête SQL du type :</p>
+<pre><code class="language-php">&lt;?php
+$requete = &quot;SELECT * FROM users WHERE username = '&quot; . $_POST['username'] . &quot;' AND password = '&quot; . $_POST['password'] . &quot;'&quot;;
+?&gt;
+</code></pre>
+<p>On peut voir que le code php récupère les variables POST username et password et les concatène dans une requête SQL. On peut donc essayer d'injecter du code SQL dans ces variables.</p>
+<p>Même sans avoir le code PHP, on peut essayer d'injecter du code SQL dans les champs de connexion. Si on obtient une erreur SQL, c'est qu'il y a une injection SQL possible. </p>
+<h3 id="injection-sql">Injection SQL</h3>
+<p>Maintenant que nous savons comment l'application fonctionne, nous allons tirer parti d'une fonctionnalité de SQL appelée "commentaires" pour abuser de la requête SQL et exécuter n'importe quelle commande arbitraire. SQL vous permet d'ajouter des commentaires à la fin de vos requêtes. Cette fonctionnalité est utile pour de nombreuses raisons, mais dans notre cas, elle sera utilisée pour injecter une commande dans la requête SQL afin de la faire exécuter.</p>
+<p>Pour ajouter un commentaire à la fin d'une requête SQL, il suffit de l'enfermer dans le format suivant <code>-- commentaire</code>. Si la requête SQL détecte un commentaire, elle <strong>l'ignorera</strong> et exécutera la requête normalement.</p>
+<p>Voici la ligne que l'on peut rentrer dans le formulaire de connexion pour essayer de bypasser l'authentification :</p>
+<pre><code>' OR 1=1 -- 
+</code></pre>
+<p>On peut voir que la requête SQL devient :</p>
+<pre><code class="language-sql">SELECT * FROM users WHERE username = '' OR 1=1 -- ' AND password = ''
+</code></pre>
+<p>On peut voir que la requête SQL est maintenant valide et que l'on peut se connecter sans connaître le mot de passe.</p>
+<h2 id="injection-sql-via-requete-get-http">Injection SQL via requête GET (HTTP)</h2>
+<h3 id="contexte-de-linjection_1">Contexte de l'injection</h3>
+<p>Imaginons que l'on soit sur un site internet qui donne des informations sur une personne ou un produit ou autre et que l'on remarque que l'URL est du type :</p>
+<pre><code>https://www.example.com/index.php?id=1
+
+ou 
+
+https://www.example.com/about/1
+
+</code></pre>
+<p>On peut supposer que le site utilise une requête SQL du type :</p>
+<pre><code class="language-sql">SELECT infos FROM users WHERE id = $_GET['id']
+</code></pre>
+<p>En utilisant <strong>Burpsuite</strong> par exemple, on peut intercepter la requête HTTP et la modifier pour essayer d'injecter du code SQL. (Dans ce cas particulier on peut le faire directement dans l'URL)</p>
+<h3 id="requete-union">Requête Union</h3>
+<p>Imaginons que la requête HTTP d'erreur du site renvoie la requête SQL (c'est improbable et ce serait une grosse faille mais c'est pour comprendre le principe) :</p>
+<pre><code class="language-sql">SELECT firstName, lastName, pfpLink, role, bio FROM people WHERE id = 2
+</code></pre>
+<p>Ainsi, on voit que la requête sélectionne cinq colonnes du tableau : firstName, lastName, pfpLink, role et bio. Nous pouvons deviner l'emplacement de ces colonnes dans la page, ce qui nous aidera à choisir l'endroit où placer nos demandes.</p>
+<p>Comme nous connaissons le nom de la table et le nombre de lignes, nous pouvons utiliser une requête d'union pour sélectionner les noms des colonnes de la table <code>people</code> dans la table columns de la base de données par défaut <code>information_schema</code>.</p>
+<p>Si on injecte : </p>
+<pre><code class="language-sql">0 UNION ALL SELECT column_name,null,null,null,null FROM information_schema.columns WHERE table_name=&quot;people&quot;
+</code></pre>
+<p>Cela crée une requête d'union et sélectionne notre cible, puis quatre colonnes nulles (pour éviter les erreurs de la requête). Remarquez que nous avons également changé l'ID que nous sélectionnons de 2 à 0. En définissant l'ID à un nombre invalide, nous nous assurons que nous ne récupérons rien avec la requête originale (légitime) ; cela signifie que la première ligne renvoyée par la base de données sera notre réponse souhaitée à partir de la requête injectée.</p>
+<h4 id="recuperer-plusieurs-colonnes">Récupérer plusieurs colonnes</h4>
+<p>Supposons que la réponse à la requête précédente ai été :</p>
+<pre><code class="language-sql">id
+</code></pre>
+<p>Cela signifie que seule la première colonne a été renvoyée. Il faut donc modifier la requête pour récupérer les autres colonnes dans une seule réponse. </p>
+<p>Heureusement, nous pouvons utiliser notre SQLi pour regrouper les résultats. Nous ne pouvons toujours récupérer qu'un seul résultat à la fois, mais en utilisant la fonction <code>group_concat()</code>, nous pouvons regrouper tous les noms de colonnes en un seul résultat :</p>
+<pre><code class="language-sql">0 UNION ALL SELECT group_concat(column_name),null,null,null,null FROM information_schema.columns WHERE table_name=&quot;people&quot;
+</code></pre>
+<p>La réponse à cette requête est :</p>
+<pre><code class="language-sql">id, firstName, lastName, pfpLink, role, shortRole, bio, notes
+</code></pre>
+<p>On a ainsi récupéré le nom de toutes les colonnes présentes dans la table <code>people</code>.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../ecoute_ports/" class="btn btn-neutral float-right" title="Ecoute de ports">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../metasploit_meterpreter/" class="btn btn-neutral float-left" title="Les post-exploits"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../injections_bash/" class="btn btn-neutral float-right" title="Bash">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -225,8 +302,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../metasploit_meterpreter/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-      <span><a href="../ecoute_ports/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+      <span><a href="../injections_bash/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

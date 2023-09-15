@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/accueil/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cyber-puit-de-connaissances.com/injections_bash/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Accueil - Cyber-puit de connaissances</title>
+    <title>Bash - Cyber-puit de connaissances</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Accueil";
-        var mkdocs_page_input_path = "accueil.md";
-        var mkdocs_page_url = "/accueil/";
+        var mkdocs_page_name = "Bash";
+        var mkdocs_page_input_path = "injections_bash.md";
+        var mkdocs_page_url = "/injections_bash/";
       </script>
     
     <script src="../js/jquery-3.6.0.min.js" defer></script>
@@ -40,10 +40,8 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Accueil</a>
-    <ul class="current">
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../accueil/">Accueil</a>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Utile</span></p>
@@ -67,7 +65,7 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Exploits</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="#">Metasploit</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../metasploit_bases/">Les bases</a>
@@ -80,13 +78,25 @@
                 </li>
     </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Injections</a>
-    <ul>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Injections</a>
+    <ul class="current">
                 <li class="toctree-l2"><a class="reference internal" href="../injections_SQL/">SQL</a>
                 </li>
                 <li class="toctree-l2"><a class="" href="../injections_XSS.md">XSS</a>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" href="../injections_bash/">Bash</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Bash</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#les-commandes-inline">Les commandes "inline"</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#contexte-de-linjection">Contexte de l'injection</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#injection-de-commandes">Injection de commandes</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
     </ul>
                   </li>
@@ -187,7 +197,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
-      <li>Accueil</li>
+          <li>Exploits &raquo;</li>
+          <li>Injections &raquo;</li>
+      <li>Bash</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -196,13 +208,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="puit-de-connaissance-en-cyber">Puit de connaissance en Cyber</h1>
-<p>Bienvenue sur mon petit site statique local pour rassembler toutes les connaissances que je peux avoir en Cyber</p>
+                <h1 id="les-injections-en-bash">Les injections en bash</h1>
+<h2 id="introduction">Introduction</h2>
+<p>L'injection de commande se produit lorsque le code côté serveur (comme PHP) dans une application web fait un appel à une fonction qui interagit directement avec la console du serveur. Une vulnérabilité de type injection de commande permet à un pirate de tirer parti de cet appel pour exécuter des commandes du système d'exploitation de manière arbitraire sur le serveur. Les possibilités pour l'attaquant sont infinies : il peut lister des fichiers, lire leur contenu, exécuter des commandes de base pour faire de la reconnaissance sur le serveur ou tout ce qu'il veut, comme s'il était assis devant le serveur et émettait des commandes directement dans la ligne de commande.</p>
+<p>L'injection est une vulnérabilité OWASP du top 10 bien connue.</p>
+<h2 id="les-commandes-inline">Les commandes "inline"</h2>
+<h3 id="contexte-de-linjection">Contexte de l'injection</h3>
+<p>Imaginons que l'on remarque qu'un code php exécute une commande du type :</p>
+<pre><code class="language-php">&lt;?php
+passthru(&quot;perl /usr/bin/cowsay -f $variable_de_lutilisateur&quot;);
+?&gt;
+</code></pre>
+<p>La fonction <code>passthru</code> exécute simplement une commande dans la console du système d'exploitation et renvoie la sortie au navigateur de l'utilisateur. Vous pouvez voir que notre commande est formée par la concaténation de la variables $mooing à la fin de celle-ci. Puisque nous pouvons manipuler cette variable, nous pouvons essayer d'injecter des commandes supplémentaires en utilisant des astuces simples. </p>
+<h3 id="injection-de-commandes">Injection de commandes</h3>
+<p>Maintenant que nous savons comment l'application fonctionne , nous allons tirer parti d'une fonctionnalité de Bash appelée "commandes en ligne" pour abuser du serveur Cowsay et exécuter n'importe quelle commande arbitraire. Bash vous permet d'exécuter des commandes à l'intérieur de commandes. Cette fonctionnalité est utile pour de nombreuses raisons, mais dans notre cas, elle sera utilisée pour injecter une commande dans le serveur Cowsay afin de la faire exécuter.</p>
+<p>Pour exécuter des commandes inline, il suffit de les enfermer dans le format suivant <code>$(votre_commande_ici)</code>. Si la console détecte une commande inline, elle <strong>l'exécutera d'abord</strong> et utilisera ensuite le résultat comme paramètre de la commande externe. </p>
+<p>Les commandes les plus pratiques à injecter peuvent être trouvées dans l'onglet <a href="https://lazizazouz.github.io/cybertank/linux_commandes_utiles/">commandes utiles</a>.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../ecoute_ports/" class="btn btn-neutral float-right" title="Ecoute de ports">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../injections_SQL/" class="btn btn-neutral float-left" title="SQL"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../hydra_bases/" class="btn btn-neutral float-right" title="Les bases">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -225,8 +252,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../injections_SQL/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-      <span><a href="../ecoute_ports/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+      <span><a href="../hydra_bases/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

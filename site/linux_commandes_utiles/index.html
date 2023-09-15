@@ -8,7 +8,7 @@
     <title>Commandes utiles - Cyber-puit de connaissances</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
@@ -17,11 +17,12 @@
         var mkdocs_page_url = "/linux_commandes_utiles/";
       </script>
     
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
     <!--[if lt IE 9]>
       <script src="../js/html5shiv.min.js"></script>
     <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-      <script>hljs.highlightAll();</script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -74,6 +75,16 @@
                 <li class="toctree-l2"><a class="reference internal" href="../metasploit_msfvenom/">Les shells</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../metasploit_meterpreter/">Les post-exploits</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Injections</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../injections_SQL/">SQL</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../injections_XSS.md">XSS</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../injections_bash/">Bash</a>
                 </li>
     </ul>
                   </li>
@@ -153,13 +164,55 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#recherche-de-user">Recherche de user</a>
         <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-les-mots-de-passe-des-utilisateurs">Trouver les mots de passe des utilisateurs</a>
+    </li>
     <li class="toctree-l4"><a class="reference internal" href="#trouver-lutilisateur-actuel">Trouver l'utilisateur actuel</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#trouver-le-nom-de-lutilisateur-du-shell">Trouver le nom de l'utilisateur du shell</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#trouver-la-version-du-systeme-dexploitation">Trouver la version du système d'exploitation</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-la-version-du-noyau">Trouver la version du noyau</a>
+    </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#trouver-les-informations-concernant-ssh">Trouver les informations concernant SSH</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-la-version-de-ssh">Trouver la version de SSH</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-la-configuration-de-ssh">Trouver la configuration de SSH</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-les-cles-ssh">Trouver les clés SSH</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-les-cles-autorisees">Trouver les clés autorisées</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-les-cles-connues">Trouver les clés connues</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#trouver-les-informations-concernant-bash">Trouver les informations concernant Bash</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-la-version-de-bash">Trouver la version de Bash</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-les-alias">Trouver les alias</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-les-variables-denvironnement">Trouver les variables d'environnement</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-les-variables-denvironnement-globales">Trouver les variables d'environnement globales</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-les-variables-denvironnement-locales">Trouver les variables d'environnement locales</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-lhistorique-des-commandes">Trouver l'historique des commandes</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-le-fichier-de-configuration-bash">Trouver le fichier de configuration bash</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-le-profile-de-lutilisateur">Trouver le profile de l'utilisateur</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#trouver-le-fichier-de-deconnexion-bash">Trouver le fichier de déconnexion bash</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#autres-historiques">Autres historiques</a>
     </li>
     </ul>
                 </li>
@@ -202,7 +255,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
           <li>Les OS &raquo;</li>
           <li>Linux &raquo;</li>
-      <li class="breadcrumb-item active">Commandes utiles</li>
+      <li>Commandes utiles</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -227,6 +280,12 @@
 <p>On peut rechercher un user dans le fichier <code>/etc/passwd</code> :</p>
 <pre><code class="language-bash">cat /etc/passwd | grep &lt;username&gt;
 </code></pre>
+<p>ou alors on peut regarder dans le dossier <code>/home</code> :</p>
+<pre><code class="language-bash">ls /home
+</code></pre>
+<h3 id="trouver-les-mots-de-passe-des-utilisateurs">Trouver les mots de passe des utilisateurs</h3>
+<pre><code class="language-bash">cat /etc/shadow
+</code></pre>
 <h3 id="trouver-lutilisateur-actuel">Trouver l'utilisateur actuel</h3>
 <pre><code class="language-bash">whoami
 </code></pre>
@@ -247,6 +306,77 @@
 <p>ou </p>
 <pre><code class="language-bash">lsb_release -a
 </code></pre>
+<h3 id="trouver-la-version-du-noyau">Trouver la version du noyau</h3>
+<pre><code class="language-bash">uname -a
+</code></pre>
+<h2 id="trouver-les-informations-concernant-ssh">Trouver les informations concernant SSH</h2>
+<h3 id="trouver-la-version-de-ssh">Trouver la version de SSH</h3>
+<pre><code class="language-bash">ssh -V
+</code></pre>
+<h3 id="trouver-la-configuration-de-ssh">Trouver la configuration de SSH</h3>
+<pre><code class="language-bash">cat /etc/ssh/sshd_config
+</code></pre>
+<h3 id="trouver-les-cles-ssh">Trouver les clés SSH</h3>
+<p>Affiche la clé privée de l'utilisateur username</p>
+<pre><code class="language-bash">cat /home/&lt;username&gt;/.ssh/id_rsa
+</code></pre>
+<p>Affiche la clé publique de l'utilisateur username</p>
+<pre><code class="language-bash">cat /home/&lt;username&gt;/.ssh/id_rsa.pub
+</code></pre>
+<h3 id="trouver-les-cles-autorisees">Trouver les clés autorisées</h3>
+<pre><code class="language-bash">cat /home/&lt;username&gt;/.ssh/authorized_keys
+</code></pre>
+<h3 id="trouver-les-cles-connues">Trouver les clés connues</h3>
+<pre><code class="language-bash">cat /home/&lt;username&gt;/.ssh/known_hosts
+</code></pre>
+<h2 id="trouver-les-informations-concernant-bash">Trouver les informations concernant Bash</h2>
+<h3 id="trouver-la-version-de-bash">Trouver la version de Bash</h3>
+<pre><code class="language-bash">bash --version
+</code></pre>
+<p>ou </p>
+<pre><code class="language-bash">echo $BASH_VERSION
+</code></pre>
+<h3 id="trouver-les-alias">Trouver les alias</h3>
+<pre><code class="language-bash">alias
+</code></pre>
+<h3 id="trouver-les-variables-denvironnement">Trouver les variables d'environnement</h3>
+<pre><code class="language-bash">env
+</code></pre>
+<h3 id="trouver-les-variables-denvironnement-globales">Trouver les variables d'environnement globales</h3>
+<pre><code class="language-bash">printenv
+</code></pre>
+<h3 id="trouver-les-variables-denvironnement-locales">Trouver les variables d'environnement locales</h3>
+<pre><code class="language-bash">set
+</code></pre>
+<h3 id="trouver-lhistorique-des-commandes">Trouver l'historique des commandes</h3>
+<pre><code class="language-bash">history
+</code></pre>
+<p>ou afficher l'historique des commandes de l'utilisateur username</p>
+<pre><code class="language-bash">cat /home/&lt;username&gt;/.bash_history
+</code></pre>
+<h3 id="trouver-le-fichier-de-configuration-bash">Trouver le fichier de configuration bash</h3>
+<pre><code class="language-bash">cat /home/&lt;username&gt;/.bashrc
+</code></pre>
+<h3 id="trouver-le-profile-de-lutilisateur">Trouver le profile de l'utilisateur</h3>
+<pre><code class="language-bash">cat /home/&lt;username&gt;/.profile
+</code></pre>
+<h3 id="trouver-le-fichier-de-deconnexion-bash">Trouver le fichier de déconnexion bash</h3>
+<pre><code class="language-bash">cat /home/&lt;username&gt;/.bash_logout
+</code></pre>
+<h2 id="autres-historiques">Autres historiques</h2>
+<ul>
+<li><code>cat /home/username/.zsh_history</code> : affiche l'historique des commandes zsh de l'utilisateur username</li>
+<li><code>cat /home/username/.history</code> : affiche l'historique des commandes history de l'utilisateur username</li>
+<li><code>cat /home/username/.mysql_history</code> : affiche l'historique des commandes mysql de l'utilisateur username</li>
+<li><code>cat /home/username/.psql_history</code> : affiche l'historique des commandes psql de l'utilisateur username</li>
+<li><code>cat /home/username/.bash_sessions/*</code> : affiche l'historique des commandes bash de l'utilisateur username</li>
+<li><code>cat /home/username/.bash_eternal_history</code> : affiche l'historique des commandes bash de l'utilisateur username</li>
+<li><code>cat /home/username/.viminfo</code> : affiche l'historique des commandes vim de l'utilisateur username</li>
+<li><code>cat /home/username/.mysql_history</code> : affiche l'historique des commandes mysql de l'utilisateur username</li>
+<li><code>cat /home/username/.nano_history</code> : affiche l'historique des commandes nano de l'utilisateur username</li>
+<li><code>cat /home/username/.lesshst</code> : affiche l'historique des commandes less de l'utilisateur username</li>
+<li><code>cat /home/username/.wget-hsts</code> : affiche l'historique des commandes wget de l'utilisateur username</li>
+</ul>
               
             </div>
           </div><footer>
@@ -282,15 +412,14 @@
     
   </span>
 </div>
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "..";</script>
-    <script src="../js/theme_extra.js"></script>
-    <script src="../js/theme.js"></script>
-      <script src="../search/main.js"></script>
-    <script>
-        jQuery(function () {
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
             SphinxRtdTheme.Navigation.enable(true);
-        });
+        };
     </script>
 
 </body>

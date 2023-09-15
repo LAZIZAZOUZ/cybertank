@@ -8,7 +8,7 @@
     <title>Les scans - Cyber-puit de connaissances</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
@@ -17,11 +17,12 @@
         var mkdocs_page_url = "/nmap_bases_scan/";
       </script>
     
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
     <!--[if lt IE 9]>
       <script src="../js/html5shiv.min.js"></script>
     <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-      <script>hljs.highlightAll();</script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -84,13 +85,31 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#scan-xmas-sx">Scan Xmas -sX</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#fragmenter-les-paquets">Fragmenter les paquets</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#autres-scans">Autres scans</a>
+        <ul>
     <li class="toctree-l4"><a class="reference internal" href="#scan-maimon-sm">Scan Maimon -sM</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#scan-personnalises">Scan personnalisés</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#amelioration-des-performances">Amélioration des performances</a>
+    <li class="toctree-l3"><a class="reference internal" href="#spoofingleurres-avec-nmap">Spoofing/Leurres avec Nmap</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#spoof-de-lip-s">Spoof de l'IP -S</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#spoof-mac">Spoof MAC</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#leurres">Leurres</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#scan-zombie">Scan Zombie</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rappel-sur-la-structure-dun-flag-tcpip">Rappel sur la structure d'un flag TCP/IP :</a>
     </li>
     </ul>
                 </li>
@@ -110,6 +129,16 @@
                 <li class="toctree-l2"><a class="reference internal" href="../metasploit_msfvenom/">Les shells</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../metasploit_meterpreter/">Les post-exploits</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Injections</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../injections_SQL/">SQL</a>
+                </li>
+                <li class="toctree-l2"><a class="" href="../injections_XSS.md">XSS</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../injections_bash/">Bash</a>
                 </li>
     </ul>
                   </li>
@@ -212,7 +241,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
           <li>Reconnaissance &raquo;</li>
           <li>Nmap &raquo;</li>
-      <li class="breadcrumb-item active">Les scans</li>
+      <li>Les scans</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -285,7 +314,7 @@ nmap -sn -vv 192.168.0.*
 <h2 id="scan-tcp-ack-sa">Scan TCP ACK <code>-sA</code></h2>
 <p>Simplement, comme son nom l'indique ça envoie un paquet avec le flag ACK. La cible devrait répondre avec un paquet RST</p>
 <h2 id="scan-tcp-windows-sw">scan TCP Windows <code>-sW</code></h2>
-<p>Une autre analyse similaire est l'analyse de la fenêtre TCP. L'analyse de la fenêtre TCP est presque identique à l'analyse ACK, mais elle examine le champ TCP Window des paquets RST renvoyés. Sur certains systèmes, cela peut révéler que le port est ouvert. Vous pouvez sélectionner ce type d'analyse avec l'option -sW. </p>
+<p>Une autre analyse similaire est l'analyse de la fenêtre TCP. L'analyse de la fenêtre TCP est presque identique à l'analyse ACK, mais elle examine le champ TCP Window des paquets RST renvoyés. Sur certains systèmes, cela peut révéler que le port est ouvert. Vous pouvez sélectionner ce type d'analyse avec l'option <code>-sW</code>. </p>
 <h2 id="scan-udp">Scan UDP</h2>
 <p>Les scans UDP sont très lent car le protocole UDP est fait pour la rapidité et n'a pas "d'accusé de réception", on peut connaitre les ports fermés mais on ne peut pas différencier les ports ouverts de ceux bloqués par firewall (et qui drop les paquets). On l'active avec <code>-sU</code>.</p>
 <p>Lorsqu'un paquet est envoyé à un port UDP ouvert, il ne devrait pas y avoir de réponse. Lorsque cela se produit, Nmap se réfère au port comme étant ouvert|filtré. En d'autres termes, il suspecte que le port est ouvert, mais qu'il pourrait être protégé par un pare-feu. S'il obtient une réponse UDP (ce qui est très inhabituel), le port est marqué comme ouvert. Le plus souvent, il n'y a pas de réponse, auquel cas la demande est envoyée une deuxième fois pour une double vérification. S'il n'y a toujours pas de réponse, le port est marqué comme ouvert|filtré et Nmap continue.</p>
@@ -306,17 +335,67 @@ Attention, en pratique Microsoft Windows (et un grand nombre de dispositifs de r
 <p>Le scan envoie une requête TCP avec uniquement le bit de "FIN" d'activé et s'attend à une réponse RST.</p>
 <h3 id="scan-xmas-sx">Scan Xmas <code>-sX</code></h3>
 <p>Le scan envoie un reqête TCP avec les bits Urgent(URG), Push (PSH) et Fin (FIN) d'activés</p>
+<h3 id="fragmenter-les-paquets">Fragmenter les paquets</h3>
+<p>Nmap propose l'option <code>-f</code> pour fragmenter les paquets. Une fois choisie, les données IP seront divisées en 8 octets ou moins. L'ajout d'un autre <code>-f</code> (<code>-f -f</code>ou <code>-ff</code>) divisera les données en fragments de 16 octets au lieu de 8. Vous pouvez changer la valeur par défaut en utilisant l'option <code>--mtu</code> ; cependant, vous devriez toujours choisir un <strong>multiple de 8</strong>.</p>
+<h2 id="autres-scans">Autres scans</h2>
 <h3 id="scan-maimon-sm">Scan Maimon <code>-sM</code></h3>
 <p>Dans ce scan les bits FIN et ACK sont activés. La cible devrait renvoyer un packet RST. <strong>Ce scan ne devrait pas fonctionner sur les réseaux récents</strong>.</p>
 <h3 id="scan-personnalises">Scan personnalisés</h3>
 <p>On peut customiser les flags TCP envoyés avec <code>--scanflags</code>. Il suffit de rajouter les flags que l'on souhaite avoir activé simultanément : SYN, RST, FIN ou autre.</p>
 <pre><code class="language-bash">sudo nmap --scanflags SYNRSTFIN
 </code></pre>
-<h4 id="rappel-sur-la-structure-dun-flag-tcpip">Rappel sur la structure d'un flag TCP/IP :</h4>
+<h2 id="spoofingleurres-avec-nmap">Spoofing/Leurres avec Nmap</h2>
+<h3 id="spoof-de-lip-s">Spoof de l'IP <code>-S</code></h3>
+<p>Dans certaines configurations de réseau, il est possible d'analyser un système cible en utilisant une adresse IP ou même une adresse MAC usurpée. Ce type d'analyse n'est utile que dans les cas où vous pouvez garantir la capture de la réponse. Si vous essayez de scanner une cible à partir d'un réseau aléatoire en utilisant une adresse IP usurpée, il y a de fortes chances qu'aucune réponse ne vous soit acheminée et que les résultats du scan ne soient pas fiables.</p>
+<p>En gros nmap va construire ses requêtes en mettant l'adresse spoofée donc les réponses seront envoyées à l'adresse en question. Il faut donc avoir accès à la machine spoofé ou trouver un moyen de rediriger les paquets de réponse après coup.</p>
+<p>La commande se lance comme suit : </p>
+<pre><code class="language-bash">nmap -S [spoofed IP] [IP cible]
+</code></pre>
+<p>En général, vous devez spécifier l'interface réseau à l'aide de <code>-e</code> et <strong>désactiver explicitement le balayage ping</strong> <code>-Pn</code>. 
+Par conséquent, au lieu de :</p>
+<pre><code class="language-bash">nmap -S SPOOFED_IP MACHINE_IP
+</code></pre>
+<p>Vous devrez lancer :</p>
+<pre><code class="language-bash">nmap -e NET_INTERFACE -Pn -S SPOOFED_IP MACHINE_IP 
+</code></pre>
+<p>Pour indiquer explicitement à Nmap l'interface réseau à utiliser et ne pas s'attendre à recevoir une réponse ping. Il convient de répéter que ce scan sera inutile si le système de l'attaquant ne peut pas surveiller le réseau pour obtenir des réponses.</p>
+<h3 id="spoof-mac">Spoof MAC</h3>
+<p>Si vous vous trouvez sur le même sous-réseau que la machine cible, vous pouvez également usurper votre adresse MAC. Vous pouvez spécifier l'adresse MAC source en utilisant <code>--spoof-mac SPOOFED_MAC</code>. Cette usurpation d'adresse n'est possible que si l'attaquant et la machine cible se trouvent sur <strong>le même réseau Ethernet (802.3)</strong> ou <strong>le même réseau WiFi (802.11)</strong>.</p>
+<p>L'usurpation d'adresse ne fonctionne que dans un nombre minimal de cas où certaines conditions sont remplies. C'est pourquoi l'attaquant peut avoir recours à des leurres pour rendre plus difficile son repérage. Le concept est simple : <strong>faire en sorte que le balayage semble provenir de plusieurs adresses IP</strong>, de sorte que l'adresse IP de l'attaquant se perde parmi elles. Comme le montre la figure ci-dessous, le balayage de la machine cible semblera provenir de trois sources différentes et, par conséquent, les réponses iront également aux leurres.</p>
+<h3 id="leurres">Leurres</h3>
+<p>Vous pouvez lancer un balayage leurre en spécifiant une adresse IP spécifique ou aléatoire après <code>-D</code>. Par exemple :</p>
+<pre><code class="language-bash">nmap -D 10.10.0.1,10.10.0.2,ME CIBLE_IP
+</code></pre>
+<p>Fera apparaître le scan de MACHINE_IP comme provenant des adresses IP 10.10.0.1, 10.10.0.2, puis ME pour indiquer que votre adresse IP doit apparaître dans le troisième ordre. Un autre exemple de commande serait :</p>
+<pre><code class="language-bash">nmap -D 10.10.0.1,10.10.0.2,RND,RND,ME CIBLE_IP
+</code></pre>
+<p>Où les troisième et quatrième adresses IP sources sont attribuées de manière aléatoire, tandis que la cinquième source sera l'adresse IP de l'attaquant. En d'autres termes, chaque fois que vous exécutez cette dernière commande, vous devez vous attendre à ce que deux nouvelles adresses IP aléatoires soient les troisième et quatrième sources du leurre.</p>
+<h3 id="scan-zombie">Scan Zombie</h3>
+<p>L'usurpation de l'adresse IP source peut être une excellente approche pour effectuer un balayage furtif. Cependant, l'usurpation ne fonctionne que dans des configurations de réseau spécifiques. Elle nécessite que vous soyez dans une position où vous pouvez surveiller le trafic. Compte tenu de ces limites, l'usurpation d'adresse IP n'a que peu d'intérêt ; cependant, nous pouvons l'améliorer grâce à l'analyse au ralenti/scan zombie.</p>
+<p>L'idle scan, ou zombie scan, nécessite un système inactif connecté au réseau avec lequel vous pouvez communiquer. En pratique, Nmap fera en sorte que chaque sonde semble provenir de l'hôte inactif (zombie), puis il vérifiera si l'hôte inactif (zombie) a reçu une réponse à la sonde usurpée. Pour ce faire, il vérifie la valeur d'identification IP (IP ID) dans l'en-tête IP. Vous pouvez lancer une analyse d'inactivité en utilisant :</p>
+<pre><code class="language-bash">nmap -sI ZOMBIE_IP MACHINE_IP
+</code></pre>
+<p>Où ZOMBIE_IP est l'adresse IP de l'hôte inactif (zombie).</p>
+<p>L'analyse de l'hôte inactif (zombie) nécessite les trois étapes suivantes pour déterminer si un port est ouvert :</p>
+<ol>
+<li>Déclencher la réponse de l'hôte inactif afin d'enregistrer l'ID IP actuel de l'hôte inactif.</li>
+<li>Envoyez un paquet SYN à un port TCP de la cible. Le paquet doit être usurpé pour donner l'impression qu'il provient de l'adresse IP de l'hôte inactif (zombie).</li>
+<li>Déclenchez une nouvelle réponse de la machine inactive afin que vous puissiez comparer la nouvelle ID IP avec celle reçue précédemment.</li>
+</ol>
+<p>Expliquons cela à l'aide de chiffres. Imaginons, le système attaquant sonde une machine inactive, une imprimante multifonction. En envoyant un SYN/ACK, il répond par un paquet RST contenant son ID IP nouvellement incrémenté.</p>
+<p>L'attaquant enverra un paquet SYN au port TCP qu'il veut vérifier sur la machine cible à l'étape suivante. </p>
+<p>Cependant, ce paquet utilisera l'adresse IP de l'hôte inactif (zombie) comme source. Trois scénarios se présentent alors. 
+1. Dans le premier scénario, le port TCP est fermé ; par conséquent, la machine cible répond à l'hôte inactif par un paquet RST. L'hôte inactif ne répond pas ; son ID IP n'est donc pas incrémenté.
+2. Dans le second scénario, le port TCP est ouvert, de sorte que la machine cible répond par un SYN/ACK à l'hôte inactif (zombie). L'hôte inactif répond à ce paquet inattendu par un paquet RST, incrémentant ainsi son ID IP.
+3. Dans le troisième scénario, la machine cible ne répond pas du tout en raison des règles du pare-feu. Cette absence de réponse aboutira au même résultat que dans le cas d'un port fermé : l'hôte inactif n'augmentera pas l'ID IP.</p>
+<p>Pour la dernière étape, l'attaquant envoie un autre SYN/ACK à l'hôte inactif. L'hôte inactif répond par un paquet RST, incrémentant à nouveau l'ID IP d'une unité. L'attaquant doit comparer l'ID IP du paquet RST reçu lors de la première étape avec l'ID IP du paquet RST reçu lors de cette troisième étape. Si la différence est de 1, cela signifie que le port de la machine cible a été fermé ou filtré. En revanche, si la différence est de 2, cela signifie que le port de la machine cible était ouvert.</p>
+<p>Il convient de répéter que cette analyse est appelée <strong>"idle scan"</strong>, car le choix d'un hôte inactif est indispensable à la précision de l'analyse. <strong>Si l'"hôte inactif" est occupé, tous les identifiants IP renvoyés seront inutiles.</strong></p>
+<h2 id="rappel-sur-la-structure-dun-flag-tcpip">Rappel sur la structure d'un flag TCP/IP :</h2>
 <p>3 octets composés de : 
 * 3 bits réservés - 1 bit "Nonce"
 * 1 bit CWR (Congestion Windows Reduced) - 1 bit  ECN (Echo) - 1 bit URG (Urgent) - 1 bit ACK (Acknoledgement)
 * 1 bit PSH (Push) - 1 bit RST (Reset) - 1 bit SYN (Synchronisation) - 1 bit FIN </p>
+<h1 id="ameliorations-possibles">Améliorations possibles</h1>
 <h2 id="amelioration-des-performances">Amélioration des performances</h2>
 <p>Vous pouvez spécifier les ports que vous souhaitez analyser au lieu des 1000 ports par défaut. La spécification des ports est maintenant intuitive. Voyons quelques exemples :</p>
 <ul>
@@ -336,6 +415,12 @@ Attention, en pratique Microsoft Windows (et un grand nombre de dispositifs de r
 <p>Pour éviter les alertes IDS, vous pouvez opter pour <code>-T0</code> ou <code>-T1</code>. Par exemple, <code>-T0</code> scanne un port à la fois et <strong>attend 5 minutes</strong> entre l'envoi de chaque sonde, ce qui vous permet de deviner combien de temps le scan d'une cible prendra pour se terminer. Si vous ne spécifiez pas de timing, <strong>Nmap utilise la méthode normale</strong> <code>-T3</code>. Notez que <code>-T5</code> est le plus agressif en termes de vitesse ; cependant, cela peut affecter la précision des résultats de l'analyse en raison de la probabilité accrue de perte de paquets. Notez que <code>-T4</code> est souvent <strong>utilisé pendant les CTF</strong> et lors de l'apprentissage du balayage sur des cibles d'entraînement, alors que <code>-T1</code> est souvent <strong>utilisé pendant les engagements réels</strong> où la furtivité est plus importante.</p>
 <p>Vous pouvez également choisir de contrôler le taux de paquets en utilisant <code>--min-rate &lt;nombre&gt;</code> et <code>--max-rate &lt;nombre&gt;</code>. Par exemple,<code>--max-rate 10</code> ou <code>--max-rate=10</code> garantit que votre scanner n'envoie pas plus de dix paquets par seconde.</p>
 <p>De plus, vous pouvez contrôler la parallélisation des sondages en utilisant<code>--min-parallelism &lt;numprobes&gt;</code> et <code>--max-parallelism &lt;numprobes&gt;</code>. Nmap sonde les cibles pour découvrir quels hôtes sont actifs et quels ports sont ouverts ; le parallélisme des sondes spécifie le nombre de sondes qui peuvent être exécutées en parallèle. Par exemple, -<code>-min-parallelism=512</code> pousse Nmap à maintenir au moins 512 sondes en parallèle ; ces 512 sondes sont liées à la découverte des hôtes et des ports ouverts.</p>
+<h2 id="ameliorer-les-details-du-scan">Améliorer les détails du scan</h2>
+<ul>
+<li>Vous pouvez envisager d'ajouter <code>--reason</code> si vous voulez que Nmap fournisse plus de détails sur son raisonnement et ses conclusions. </li>
+<li>Pour plus de détails en sortie, on peut ajouter <code>-v</code> pour verbose ou <code>-vv</code> pour deux niveaux de verbose.</li>
+<li>On peut ajouter <code>-d</code> pour avoir des détails de débuggage ou <code>-dd</code> pour encore plus de détails.</li>
+</ul>
               
             </div>
           </div><footer>
@@ -371,15 +456,14 @@ Attention, en pratique Microsoft Windows (et un grand nombre de dispositifs de r
     
   </span>
 </div>
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "..";</script>
-    <script src="../js/theme_extra.js"></script>
-    <script src="../js/theme.js"></script>
-      <script src="../search/main.js"></script>
-    <script>
-        jQuery(function () {
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
             SphinxRtdTheme.Navigation.enable(true);
-        });
+        };
     </script>
 
 </body>

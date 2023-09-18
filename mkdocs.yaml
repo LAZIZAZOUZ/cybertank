@@ -55,7 +55,8 @@ nav:
     - MySQL : 'MySQL_exploit_bases.md'
 
   - Les OS :
-    - Windows : 'vide.md'
+    - Windows : 
+      - Privilège escalation : 'windows_privelege_escalation.md'
       
     - Linux : 
       - Commandes utiles : 'linux_commandes_utiles.md'
